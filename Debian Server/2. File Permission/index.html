@@ -1,0 +1,1169 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../1.%20Manajemen_User_Group/">
+      
+      
+        <link rel="next" href="../../Kelas%20XI/1.Initial-Setup/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+    
+    
+      
+        <title>File Permission - Administrasi Server</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.26e3688c.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.484 4.484 0 0 1-.563-1.191 3.835 3.835 0 0 1-.05-2.063 4.647 4.647 0 0 1-2.025-.293.75.75 0 0 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.747.747 0 0 1 1.06 0 .748.748 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.425 2.425 0 0 1-.507-.441 3.075 3.075 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19a.884.884 0 0 1 .01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7 5.527c-.814-.68-1.75-1.462-2.692-2.619a3.737 3.737 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353V.75Z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429Zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.036.036 0 0 0-.004-.009l-.006-.006-.008-.001c-.003 0-.006.002-.009.004Z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.488 3.488 0 0 1 2.441 0l.999-1a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.036 5.036 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.677 1.677 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06Zm.53 6.28a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75ZM6.173 5h3.654A.172.172 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173Z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.75 2.5h10.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Zm4 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5Zm0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5ZM2.5 7.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0Z"/></svg>');}</style>
+
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#file-permission" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Administrasi Server" class="md-header__button md-logo" aria-label="Administrasi Server" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Administrasi Server
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              File Permission
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Administrasi Server" class="md-nav__button md-logo" aria-label="Administrasi Server" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Administrasi Server
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Debian Server
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Debian Server
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%20Manajemen_User_Group/" class="md-nav__link">
+        Manajemen User dan Group
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          File Permission
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        File Permission
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chown" class="md-nav__link">
+    chown
+  </a>
+  
+    <nav class="md-nav" aria-label="chown">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#praktikum-mandiri-1" class="md-nav__link">
+    Praktikum Mandiri #1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tugas-mandiri-1" class="md-nav__link">
+    Tugas Mandiri 1 !!!
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chmod" class="md-nav__link">
+    Chmod
+  </a>
+  
+    <nav class="md-nav" aria-label="Chmod">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chmod-numeric" class="md-nav__link">
+    chmod numeric
+  </a>
+  
+    <nav class="md-nav" aria-label="chmod numeric">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#praktikum" class="md-nav__link">
+    Praktikum !!!
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chmod-symbolic" class="md-nav__link">
+    chmod symbolic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tugas-mandiri-2" class="md-nav__link">
+    Tugas Mandiri #2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-file-permissions" class="md-nav__link">
+    Default File Permissions
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Kelas XI
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kelas XI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kelas%20XI/1.Initial-Setup/" class="md-nav__link">
+        Initial Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kelas%20XI/2.%20SSH-Server/" class="md-nav__link">
+        SSH Server
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kelas%20XI/3.DNS-Server/" class="md-nav__link">
+        DNS Server
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kelas%20XI/4.web-server/" class="md-nav__link">
+        Web Server
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chown" class="md-nav__link">
+    chown
+  </a>
+  
+    <nav class="md-nav" aria-label="chown">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#praktikum-mandiri-1" class="md-nav__link">
+    Praktikum Mandiri #1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tugas-mandiri-1" class="md-nav__link">
+    Tugas Mandiri 1 !!!
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chmod" class="md-nav__link">
+    Chmod
+  </a>
+  
+    <nav class="md-nav" aria-label="Chmod">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chmod-numeric" class="md-nav__link">
+    chmod numeric
+  </a>
+  
+    <nav class="md-nav" aria-label="chmod numeric">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#praktikum" class="md-nav__link">
+    Praktikum !!!
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chmod-symbolic" class="md-nav__link">
+    chmod symbolic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tugas-mandiri-2" class="md-nav__link">
+    Tugas Mandiri #2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-file-permissions" class="md-nav__link">
+    Default File Permissions
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="file-permission">File Permission</h1>
+<p>Pada sub bab ini, akan dibahas mengenaifile dan direktori. Dari segi tingkat hak akses, hak akses itu sendiri dibedakan
+menjadi tiga, yaitu read (r), write (w), dan executable (x). Sedangkan dari segi
+pemilik hak akses, hak akses dibedakan menjadi tiga juga, yaitu user/owner (u),
+groups (g), dan other (o).
+Sebelum melangkah lebih jauh, kita akan belajar membaca hak akses suatu file
+atau direktori. Perhatikan perintah berikut</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="c1"># ls -l /home</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">total</span> <span class="mi">16</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">12</span> <span class="n">rehan</span>   <span class="n">rehan</span>   <span class="mi">4096</span> <span class="n">May</span> <span class="mi">16</span> <span class="mi">11</span><span class="p">:</span><span class="mi">06</span> <span class="n">rehan</span>
+</span></code></pre></div>
+<p>Pada kolom pertama <code>drwxr-xr-x</code> merupakan permission file dari directory <code>rehan</code>. Dapat dibagi menjadi 4 bagian <code>[d] [rwx] [r-x] [r-x]</code>, keempat bagian tersebut dapat diartikan sebagai berikut :<br />
+1. <code>[d]</code> = menandakan sebuah direktori/folder.<br />
+2. <code>[rwx]</code> = Menandakan permission untuk User/Owner, dengan pola permission <code>[rwx]</code> maka user/owner memiliki hak penuh terhadap file/folder tersebut. User/owner dapat melakukan read, write dan execute.<br />
+3.  <code>[r-x]</code> = Menandakan permission untuk Group, dengan pola permission <code>[r-x]</code> maka user yang merupakan anggota group tersebut dapat melakukan read dan execute namun tidak dapat melakukan write.<br />
+4. <code>[r-x]</code> = Menandakan permission untuk Others (Bukan user/owner ataupun anggota group), dengan pola permission <code>[r-x]</code> maka Others memiliki kewenangan yang sama seperti user Group.</p>
+<p>Kemudian pada kolom ketiga <code>rehan</code> merupakan user pemilik dari direktori tersebut, sedangkan pada kolom keempat <code>rehan</code> merupakan group pemilik dari direktori tersebut, dan kolom terakhir <code>rehan</code> merupakan nama file/direktori tersebut.</p>
+<h2 id="chown">chown</h2>
+<p>Perintah ini digunakan untuk merubah kepemilikan suatu file/direktori terhadap user dan group. Sebelum kita mencoba perintah <code>chown</code> ada baiknya kita membuat sebuah folder baru dan melihat permission nya agar nanti kita dapat membandingkan sebelum dan sesudah memasukkan perintah <code>chown</code>.</p>
+<p><div class="language-py highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">rehan</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">su</span> <span class="o">-</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">Password</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># cd /home</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># mkdir permisi</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># ls -ld permisi</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">total</span> <span class="mi">20</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">2</span> <span class="n">root</span>    <span class="n">root</span>    <span class="mi">4096</span> <span class="n">May</span> <span class="mi">18</span> <span class="mi">09</span><span class="p">:</span><span class="mi">17</span> <span class="n">permisi</span>
+</span></code></pre></div>
+Terlihat folder <code>permisi</code> yang kita buat merupakan kepunyaan user <code>root</code> dan group <code>root</code>. Sekarang kita akan coba merubah kepemilikan folder <code>permisi</code> menjadi kepunyaan user <code>student</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>ls -ld</code> hanya digunakan untuk melihat sebuah folder, untuk melihat file gunakan perintah <code>ls-l</code> saja</p>
+</div>
+<p><div class="language-py highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># chown student /home/permisi</span>
+</span></code></pre></div>
+Sekarang mari kita lihat setelah melakukan perintah diatas ada perubahan atau tidak.</p>
+<p><div class="language-py highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">ls</span> <span class="o">-</span><span class="n">ld</span> <span class="n">permisi</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">total</span> <span class="mi">20</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">2</span> <span class="n">student</span> <span class="n">student</span> <span class="mi">4096</span> <span class="n">May</span> <span class="mi">18</span> <span class="mi">09</span><span class="p">:</span><span class="mi">17</span> <span class="n">permisi</span>
+</span></code></pre></div>
+Terlihat pada kolom ke tiga dan keempat , kepemilikan dari folder <code>permisi</code> telah berubah menjadi kepunyaan user <code>student</code> dan kepunyaan group <code>student</code>. Secara otomatis <code>chown</code> akan mengisikan <code>student</code> pada kolom ke-empat karena kita tidak mendefinisikan group pemiliknya. Berikut contoh apabila kita sertakan group pemilik dalam perintah <code>chown</code>. Tapi sebelumnya kita buat group baru terlebih dahulu<br />
+<div class="language-py highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># groupadd cobadoang</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># chown rehan:cobadoang /home/permisi</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># ls -l</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">total</span> <span class="mi">20</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">2</span> <span class="n">rehan</span>   <span class="n">cobadoang</span> <span class="mi">4096</span> <span class="n">May</span> <span class="mi">18</span> <span class="mi">09</span><span class="p">:</span><span class="mi">17</span> <span class="n">permisi</span>
+</span></code></pre></div>
+Sebagaimana terlihat pada kolom 3 dan 4 , sekarang folder <code>permisi</code> telah menjadi kepunyaan user <code>rehan</code> dan kepunyaan user <code>cobadoang</code>. Kita juga dapat hanya mengganti kepemilikan group dengan cara seperti berikut
+<div class="language-py highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># chown :student /home/permisi</span>
+</span></code></pre></div>
+Sekarang mari kita lihat apakah ada perubahan.
+<div class="language-py highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># ls -l</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">total</span> <span class="mi">20</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">2</span> <span class="n">rehan</span>   <span class="n">student</span> <span class="mi">4096</span> <span class="n">May</span> <span class="mi">18</span> <span class="mi">09</span><span class="p">:</span><span class="mi">17</span> <span class="n">permisi</span>
+</span></code></pre></div>
+Terlihat folder <code>permisi</code> sudah menjadi kepunyaan dari group <code>student</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Apabila folder memiliki subdirektori (anak) gunakan option <code>-R</code>, agar perintah chown juga berlaku ke subdirektorinya, maka syntaxnya menjadi
+<code>chown -R [user]:[group] [path file/folder]</code>.</p>
+</div>
+<h3 id="praktikum-mandiri-1">Praktikum Mandiri #1</h3>
+<ol>
+<li>Membuat User baru dengan nama Tono, Toni, Tini dan Tina
+<div class="language-py highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># adduser tono</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">Adding</span> <span class="n">user</span> <span class="err">`</span><span class="n">tono</span><span class="s1">&#39; ...</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">Adding</span> <span class="n">new</span> <span class="n">group</span> <span class="err">`</span><span class="n">tono</span><span class="s1">&#39; (1008) ...</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">Adding</span> <span class="n">new</span> <span class="n">user</span> <span class="err">`</span><span class="n">tono</span><span class="s1">&#39; (1004) with group `tono&#39;</span> <span class="o">...</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">Creating</span> <span class="n">home</span> <span class="n">directory</span> <span class="err">`</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">tono</span><span class="s1">&#39; ...</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">Copying</span> <span class="n">files</span> <span class="kn">from</span> <span class="err">`</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">skel</span><span class="s1">&#39; ...</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="n">New</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">Retype</span> <span class="n">new</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">passwd</span><span class="p">:</span> <span class="n">password</span> <span class="n">updated</span> <span class="n">successfully</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">Changing</span> <span class="n">the</span> <span class="n">user</span> <span class="n">information</span> <span class="k">for</span> <span class="n">tono</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">Enter</span> <span class="n">the</span> <span class="n">new</span> <span class="n">value</span><span class="p">,</span> <span class="ow">or</span> <span class="n">press</span> <span class="n">ENTER</span> <span class="k">for</span> <span class="n">the</span> <span class="n">default</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        <span class="n">Full</span> <span class="n">Name</span> <span class="p">[]:</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>        <span class="n">Room</span> <span class="n">Number</span> <span class="p">[]:</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>        <span class="n">Work</span> <span class="n">Phone</span> <span class="p">[]:</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>        <span class="n">Home</span> <span class="n">Phone</span> <span class="p">[]:</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>        <span class="n">Other</span> <span class="p">[]:</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="n">Is</span> <span class="n">the</span> <span class="n">information</span> <span class="n">correct</span><span class="err">?</span> <span class="p">[</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">]</span> <span class="n">Y</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># adduser toni</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="n">Adding</span> <span class="n">user</span> <span class="err">`</span><span class="n">toni</span><span class="s1">&#39; ...</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="n">Adding</span> <span class="n">new</span> <span class="n">group</span> <span class="err">`</span><span class="n">toni</span><span class="s1">&#39; (1009) ...</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="n">Adding</span> <span class="n">new</span> <span class="n">user</span> <span class="err">`</span><span class="n">toni</span><span class="s1">&#39; (1005) with group `toni&#39;</span> <span class="o">...</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="n">Creating</span> <span class="n">home</span> <span class="n">directory</span> <span class="err">`</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">toni</span><span class="s1">&#39; ...</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="n">Copying</span> <span class="n">files</span> <span class="kn">from</span> <span class="err">`</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">skel</span><span class="s1">&#39; ...</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="n">New</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="n">Retype</span> <span class="n">new</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="n">passwd</span><span class="p">:</span> <span class="n">password</span> <span class="n">updated</span> <span class="n">successfully</span>
+</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="n">Changing</span> <span class="n">the</span> <span class="n">user</span> <span class="n">information</span> <span class="k">for</span> <span class="n">toni</span>
+</span><span id="__span-7-28"><a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="n">Enter</span> <span class="n">the</span> <span class="n">new</span> <span class="n">value</span><span class="p">,</span> <span class="ow">or</span> <span class="n">press</span> <span class="n">ENTER</span> <span class="k">for</span> <span class="n">the</span> <span class="n">default</span>
+</span><span id="__span-7-29"><a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a>        <span class="n">Full</span> <span class="n">Name</span> <span class="p">[]:</span>
+</span><span id="__span-7-30"><a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a>        <span class="n">Room</span> <span class="n">Number</span> <span class="p">[]:</span>
+</span><span id="__span-7-31"><a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a>        <span class="n">Work</span> <span class="n">Phone</span> <span class="p">[]:</span>
+</span><span id="__span-7-32"><a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a>        <span class="n">Home</span> <span class="n">Phone</span> <span class="p">[]:</span>
+</span><span id="__span-7-33"><a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a>        <span class="n">Other</span> <span class="p">[]:</span>
+</span><span id="__span-7-34"><a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a><span class="n">Is</span> <span class="n">the</span> <span class="n">information</span> <span class="n">correct</span><span class="err">?</span> <span class="p">[</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">]</span> <span class="n">Y</span>
+</span><span id="__span-7-35"><a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># adduser tini</span>
+</span><span id="__span-7-36"><a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a><span class="n">Adding</span> <span class="n">user</span> <span class="err">`</span><span class="n">tini</span><span class="s1">&#39; ...</span>
+</span><span id="__span-7-37"><a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a><span class="n">Adding</span> <span class="n">new</span> <span class="n">group</span> <span class="err">`</span><span class="n">tini</span><span class="s1">&#39; (1010) ...</span>
+</span><span id="__span-7-38"><a id="__codelineno-7-38" name="__codelineno-7-38" href="#__codelineno-7-38"></a><span class="n">Adding</span> <span class="n">new</span> <span class="n">user</span> <span class="err">`</span><span class="n">tini</span><span class="s1">&#39; (1006) with group `tini&#39;</span> <span class="o">...</span>
+</span><span id="__span-7-39"><a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="n">Creating</span> <span class="n">home</span> <span class="n">directory</span> <span class="err">`</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">tini</span><span class="s1">&#39; ...</span>
+</span><span id="__span-7-40"><a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a><span class="n">Copying</span> <span class="n">files</span> <span class="kn">from</span> <span class="err">`</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">skel</span><span class="s1">&#39; ...</span>
+</span><span id="__span-7-41"><a id="__codelineno-7-41" name="__codelineno-7-41" href="#__codelineno-7-41"></a><span class="n">New</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-7-42"><a id="__codelineno-7-42" name="__codelineno-7-42" href="#__codelineno-7-42"></a><span class="n">Retype</span> <span class="n">new</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-7-43"><a id="__codelineno-7-43" name="__codelineno-7-43" href="#__codelineno-7-43"></a><span class="n">passwd</span><span class="p">:</span> <span class="n">password</span> <span class="n">updated</span> <span class="n">successfully</span>
+</span><span id="__span-7-44"><a id="__codelineno-7-44" name="__codelineno-7-44" href="#__codelineno-7-44"></a><span class="n">Changing</span> <span class="n">the</span> <span class="n">user</span> <span class="n">information</span> <span class="k">for</span> <span class="n">tini</span>
+</span><span id="__span-7-45"><a id="__codelineno-7-45" name="__codelineno-7-45" href="#__codelineno-7-45"></a><span class="n">Enter</span> <span class="n">the</span> <span class="n">new</span> <span class="n">value</span><span class="p">,</span> <span class="ow">or</span> <span class="n">press</span> <span class="n">ENTER</span> <span class="k">for</span> <span class="n">the</span> <span class="n">default</span>
+</span><span id="__span-7-46"><a id="__codelineno-7-46" name="__codelineno-7-46" href="#__codelineno-7-46"></a>        <span class="n">Full</span> <span class="n">Name</span> <span class="p">[]:</span>
+</span><span id="__span-7-47"><a id="__codelineno-7-47" name="__codelineno-7-47" href="#__codelineno-7-47"></a>        <span class="n">Room</span> <span class="n">Number</span> <span class="p">[]:</span>
+</span><span id="__span-7-48"><a id="__codelineno-7-48" name="__codelineno-7-48" href="#__codelineno-7-48"></a>        <span class="n">Work</span> <span class="n">Phone</span> <span class="p">[]:</span>
+</span><span id="__span-7-49"><a id="__codelineno-7-49" name="__codelineno-7-49" href="#__codelineno-7-49"></a>        <span class="n">Home</span> <span class="n">Phone</span> <span class="p">[]:</span>
+</span><span id="__span-7-50"><a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a>        <span class="n">Other</span> <span class="p">[]:</span>
+</span><span id="__span-7-51"><a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a><span class="n">Is</span> <span class="n">the</span> <span class="n">information</span> <span class="n">correct</span><span class="err">?</span> <span class="p">[</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">]</span> <span class="n">Y</span>
+</span><span id="__span-7-52"><a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># adduser tina</span>
+</span><span id="__span-7-53"><a id="__codelineno-7-53" name="__codelineno-7-53" href="#__codelineno-7-53"></a><span class="n">Adding</span> <span class="n">user</span> <span class="err">`</span><span class="n">tina</span><span class="s1">&#39; ...</span>
+</span><span id="__span-7-54"><a id="__codelineno-7-54" name="__codelineno-7-54" href="#__codelineno-7-54"></a><span class="n">Adding</span> <span class="n">new</span> <span class="n">group</span> <span class="err">`</span><span class="n">tina</span><span class="s1">&#39; (1011) ...</span>
+</span><span id="__span-7-55"><a id="__codelineno-7-55" name="__codelineno-7-55" href="#__codelineno-7-55"></a><span class="n">Adding</span> <span class="n">new</span> <span class="n">user</span> <span class="err">`</span><span class="n">tina</span><span class="s1">&#39; (1007) with group `tina&#39;</span> <span class="o">...</span>
+</span><span id="__span-7-56"><a id="__codelineno-7-56" name="__codelineno-7-56" href="#__codelineno-7-56"></a><span class="n">Creating</span> <span class="n">home</span> <span class="n">directory</span> <span class="err">`</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">tina</span><span class="s1">&#39; ...</span>
+</span><span id="__span-7-57"><a id="__codelineno-7-57" name="__codelineno-7-57" href="#__codelineno-7-57"></a><span class="n">Copying</span> <span class="n">files</span> <span class="kn">from</span> <span class="err">`</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">skel</span><span class="s1">&#39; ...</span>
+</span><span id="__span-7-58"><a id="__codelineno-7-58" name="__codelineno-7-58" href="#__codelineno-7-58"></a><span class="n">New</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-7-59"><a id="__codelineno-7-59" name="__codelineno-7-59" href="#__codelineno-7-59"></a><span class="n">Retype</span> <span class="n">new</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-7-60"><a id="__codelineno-7-60" name="__codelineno-7-60" href="#__codelineno-7-60"></a><span class="n">passwd</span><span class="p">:</span> <span class="n">password</span> <span class="n">updated</span> <span class="n">successfully</span>
+</span><span id="__span-7-61"><a id="__codelineno-7-61" name="__codelineno-7-61" href="#__codelineno-7-61"></a><span class="n">Changing</span> <span class="n">the</span> <span class="n">user</span> <span class="n">information</span> <span class="k">for</span> <span class="n">tina</span>
+</span><span id="__span-7-62"><a id="__codelineno-7-62" name="__codelineno-7-62" href="#__codelineno-7-62"></a><span class="n">Enter</span> <span class="n">the</span> <span class="n">new</span> <span class="n">value</span><span class="p">,</span> <span class="ow">or</span> <span class="n">press</span> <span class="n">ENTER</span> <span class="k">for</span> <span class="n">the</span> <span class="n">default</span>
+</span><span id="__span-7-63"><a id="__codelineno-7-63" name="__codelineno-7-63" href="#__codelineno-7-63"></a>        <span class="n">Full</span> <span class="n">Name</span> <span class="p">[]:</span>
+</span><span id="__span-7-64"><a id="__codelineno-7-64" name="__codelineno-7-64" href="#__codelineno-7-64"></a>        <span class="n">Room</span> <span class="n">Number</span> <span class="p">[]:</span>
+</span><span id="__span-7-65"><a id="__codelineno-7-65" name="__codelineno-7-65" href="#__codelineno-7-65"></a>        <span class="n">Work</span> <span class="n">Phone</span> <span class="p">[]:</span>
+</span><span id="__span-7-66"><a id="__codelineno-7-66" name="__codelineno-7-66" href="#__codelineno-7-66"></a>        <span class="n">Home</span> <span class="n">Phone</span> <span class="p">[]:</span>
+</span><span id="__span-7-67"><a id="__codelineno-7-67" name="__codelineno-7-67" href="#__codelineno-7-67"></a>        <span class="n">Other</span> <span class="p">[]:</span>
+</span><span id="__span-7-68"><a id="__codelineno-7-68" name="__codelineno-7-68" href="#__codelineno-7-68"></a><span class="n">Is</span> <span class="n">the</span> <span class="n">information</span> <span class="n">correct</span><span class="err">?</span> <span class="p">[</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">]</span> <span class="n">Y</span>
+</span></code></pre></div></li>
+<li>Membuat group dengan nama Barcelona dan Madrid
+<div class="language-py highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># groupadd barcelona</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># groupadd madrid</span>
+</span></code></pre></div></li>
+<li>Membuat Folder/Direktori dengan nama Barcelona dan Madrid didalam /home
+<div class="language-py highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># cd /home</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># mkdir barcelona madrid</span>
+</span></code></pre></div></li>
+<li>Membuat File Daftar-Pemain.txt didalam Direktori Barcelona dan Real Madrid.
+<div class="language-py highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># touch barcelona/daftar-pemain.txt</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># touch madrid/daftar-pemain.txt</span>
+</span></code></pre></div></li>
+<li>Memasukkan Tono dan Tina kedalam group Barcelona.
+<div class="language-py highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># adduser tono barcelona</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">Adding</span> <span class="n">user</span> <span class="err">`</span><span class="n">tono</span><span class="s1">&#39; to group `barcelona&#39;</span> <span class="o">...</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">Adding</span> <span class="n">user</span> <span class="n">tono</span> <span class="n">to</span> <span class="n">group</span> <span class="n">barcelona</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">Done</span><span class="o">.</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># adduser tina barcelona</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="n">Adding</span> <span class="n">user</span> <span class="err">`</span><span class="n">tina</span><span class="s1">&#39; to group `barcelona&#39;</span> <span class="o">...</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">Adding</span> <span class="n">user</span> <span class="n">tina</span> <span class="n">to</span> <span class="n">group</span> <span class="n">barcelona</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="n">Done</span><span class="o">.</span>
+</span></code></pre></div></li>
+<li>Memasukkan Toni dan Tini kedalam group Madrid.
+<div class="language-py highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># adduser toni madrid</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">Adding</span> <span class="n">user</span> <span class="err">`</span><span class="n">toni</span><span class="s1">&#39; to group `madrid&#39;</span> <span class="o">...</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">Adding</span> <span class="n">user</span> <span class="n">toni</span> <span class="n">to</span> <span class="n">group</span> <span class="n">madrid</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">Done</span><span class="o">.</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># adduser tini madrid</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">Adding</span> <span class="n">user</span> <span class="err">`</span><span class="n">tini</span><span class="s1">&#39; to group `madrid&#39;</span> <span class="o">...</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="n">Adding</span> <span class="n">user</span> <span class="n">tini</span> <span class="n">to</span> <span class="n">group</span> <span class="n">madrid</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="n">Done</span><span class="o">.</span>
+</span></code></pre></div></li>
+<li>Mengubah kepemilikan Folder Barcelona menjadi milik user <code>Tono</code> dan group <code>Barcelona</code>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># chown -R tono:barcelona /home/barcelona/</span>
+</span></code></pre></div></li>
+<li>Mengubah kepemilikan Folder Madrid menjadi milik user <code>Toni</code> dan group <code>Madrid</code>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># chown -R toni:madrid /home/madrid/</span>
+</span></code></pre></div></li>
+<li>
+<p>Melihat permission file `/barcelona/daftar-pemain.txt</p>
+</li>
+<li>
+<p>Login Sebagai User Tono kemudian edit file Barcelona/Daftar-Pemain.txt
+<div class="language-py highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># su - tono</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">tono</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">nano</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">barcelona</span><span class="o">/</span><span class="n">daftar</span><span class="o">-</span><span class="n">pemain</span><span class="o">.</span><span class="n">txt</span>
+</span></code></pre></div>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>     <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">barcelona</span><span class="o">/</span><span class="n">daftar</span><span class="o">-</span><span class="n">pemain</span><span class="o">.</span><span class="n">txt</span> <span class="o">*</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">LIonel</span> <span class="n">messi</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">Emile</span> <span class="n">smithrowe</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="o">^</span><span class="n">G</span> <span class="n">Help</span>      <span class="o">^</span><span class="n">O</span> <span class="n">Write</span> <span class="n">Out</span> <span class="o">^</span><span class="n">W</span> <span class="n">Where</span> <span class="n">Is</span>  <span class="o">^</span><span class="n">K</span> <span class="n">Cut</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="o">^</span><span class="n">X</span> <span class="n">Exit</span>      <span class="o">^</span><span class="n">R</span> <span class="n">Read</span> <span class="n">File</span> <span class="o">^</span>\ <span class="n">Replace</span>   <span class="o">^</span><span class="n">U</span> <span class="n">Paste</span> 
+</span></code></pre></div></p>
+</li>
+<li>Login Sebagai User Tina kemudian edit file Barcelona/Daftar-Pemain.txt
+<div class="language-py highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">tono</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">su</span> <span class="o">-</span> <span class="n">tina</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">Password</span><span class="p">:</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="n">tina</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">nano</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">barcelona</span><span class="o">/</span><span class="n">daftar</span><span class="o">-</span><span class="n">pemain</span><span class="o">.</span><span class="n">txt</span> 
+</span></code></pre></div>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>  <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">barcelona</span><span class="o">/</span><span class="n">daftar</span><span class="o">-</span><span class="n">pemain</span><span class="o">.</span><span class="n">txt</span>               
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="n">LIonel</span> <span class="n">messi</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">Emile</span> <span class="n">smithrowe</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="n">File</span> <span class="s1">&#39;/home/barcelona/daftar-pemain.txt&#39;</span> <span class="ow">is</span> <span class="n">unwritable</span>
+</span></code></pre></div></li>
+<li>
+<p>Login Sebagai User Toni kemudian edit file Madrid/Daftar-Pemain.txt
+<div class="language-py highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># su - toni</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">toni</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">nano</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">madrid</span><span class="o">/</span><span class="n">daftar</span><span class="o">-</span><span class="n">pemain</span><span class="o">.</span><span class="n">txt</span>
+</span></code></pre></div>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>  <span class="n">GNU</span> <span class="n">nano</span> <span class="mf">5.4</span>    <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">madrid</span><span class="o">/</span><span class="n">daftar</span><span class="o">-</span><span class="n">pemain</span><span class="o">.</span><span class="n">txt</span>            
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="n">roneldo</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">artinya</span> <span class="n">apa</span> <span class="n">bang</span> <span class="n">messi</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>                      <span class="p">[</span> <span class="n">Read</span> <span class="mi">2</span> <span class="n">lines</span> <span class="p">]</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="o">^</span><span class="n">G</span> <span class="n">Help</span>     <span class="o">^</span><span class="n">O</span> <span class="n">Write</span> <span class="n">Out</span><span class="o">^</span><span class="n">W</span> <span class="n">Where</span> <span class="n">Is</span> <span class="o">^</span><span class="n">K</span> <span class="n">Cut</span>      <span class="o">^</span><span class="n">T</span> <span class="n">Execute</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="o">^</span><span class="n">X</span> <span class="n">Exit</span>     <span class="o">^</span><span class="n">R</span> <span class="n">Read</span> <span class="n">File</span><span class="o">^</span>\ <span class="n">Replace</span>  <span class="o">^</span><span class="n">U</span> <span class="n">Paste</span>    <span class="o">^</span><span class="n">J</span> <span class="n">Justify</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Login sebagai user Tini kemudian edit file Madrid/Daftar-Pemain.txt
+<div class="language-py highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">toni</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">su</span> <span class="o">-</span> <span class="n">tini</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">Password</span><span class="p">:</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="n">tini</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">nano</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">madrid</span><span class="o">/</span><span class="n">daftar</span><span class="o">-</span><span class="n">pemain</span><span class="o">.</span><span class="n">txt</span>
+</span></code></pre></div>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>        <span class="n">GNU</span> <span class="n">nano</span> <span class="mf">5.4</span>    <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">madrid</span><span class="o">/</span><span class="n">daftar</span><span class="o">-</span><span class="n">pemain</span><span class="o">.</span><span class="n">txt</span>             
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">roneldo</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">artinya</span> <span class="n">apa</span> <span class="n">bang</span> <span class="n">messi</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>   <span class="p">[</span> <span class="n">File</span> <span class="s1">&#39;/home/madrid/daftar-pemain.txt&#39;</span> <span class="ow">is</span> <span class="n">unwritable</span> <span class="p">]</span>
+</span></code></pre></div></p>
+</li>
+<li>Login sebagai root kemudian cek status kepemilikan folder barcelona dan real madrid</li>
+</ol>
+<p><div class="language-py highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">tini</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">su</span> <span class="o">-</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="n">Password</span><span class="p">:</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># ls -l /home</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">2</span> <span class="n">tono</span>    <span class="n">barcelona</span> <span class="mi">4096</span> <span class="n">May</span> <span class="mi">18</span> <span class="mi">11</span><span class="p">:</span><span class="mi">27</span> <span class="n">barcelona</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">2</span> <span class="n">root</span>    <span class="n">root</span>      <span class="mi">4096</span> <span class="n">May</span> <span class="mi">18</span> <span class="mi">10</span><span class="p">:</span><span class="mi">58</span> <span class="n">cuaks</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">2</span> <span class="n">toni</span>    <span class="n">madrid</span>    <span class="mi">4096</span> <span class="n">May</span> <span class="mi">23</span> <span class="mi">06</span><span class="p">:</span><span class="mi">11</span> <span class="n">madrid</span>
+</span></code></pre></div>
+15. Melihat kepemilikan file daftar-pemain.txt</p>
+<p><div class="language-py highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># ls -l /home/barcelona/</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="n">total</span> <span class="mi">4</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">tono</span> <span class="n">barcelona</span> <span class="mi">30</span> <span class="n">May</span> <span class="mi">18</span> <span class="mi">11</span><span class="p">:</span><span class="mi">27</span> <span class="n">daftar</span><span class="o">-</span><span class="n">pemain</span><span class="o">.</span><span class="n">txt</span>
+</span></code></pre></div>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># ls -l /home/madrid/</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="n">total</span> <span class="mi">4</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">toni</span> <span class="n">madrid</span> <span class="mi">31</span> <span class="n">May</span> <span class="mi">23</span> <span class="mi">06</span><span class="p">:</span><span class="mi">09</span> <span class="n">daftar</span><span class="o">-</span><span class="n">pemain</span><span class="o">.</span><span class="n">txt</span>
+</span></code></pre></div></p>
+<h3 id="tugas-mandiri-1">Tugas Mandiri 1 !!!</h3>
+<ol>
+<li>Buat lah 2 buah user dengan nama <code>budi</code> dan <code>jono</code>.</li>
+<li>Buat lah 2 buah folder di <code>/home</code> dengan nama <code>marketing</code> dan <code>keuangan</code></li>
+<li>Buatlah Group dengan nama <code>pegawai</code></li>
+<li>Masukkan user <code>budi</code> dan <code>jono</code> kedalam group <code>pegawai</code></li>
+<li>Ubah kepemilikan folder <code>marketing</code> dan subdirektorinya menjadi kepemilikan user <code>budi</code> dan group <code>pegawai</code></li>
+<li>Ubah kepemilikan folder <code>keuangan</code> dan subdirektorinya menjadi kepemilikan user <code>jono</code> dan group <code>pegawai</code></li>
+<li>Buktikan Kepemilikan user <code>budi</code> terhadap folder <code>marketing</code>.</li>
+<li>Buktikan kepemilikan user <code>jono</code> terhadap folder <code>keuangan</code>.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Tuliskan jawaban di file pdf, kemudian kirimkan ke channel pengumpulan di discord.</p>
+</div>
+<h2 id="chmod">Chmod</h2>
+<h3 id="chmod-numeric">chmod numeric</h3>
+<p>Perintah ini digunakan untuk merubah hak akses suatu file/direktori. Perintah ini memanfaatkan konversi bilangan biner ke desimal yang merepresentasikan hak akses rwx (read, write, executable). Perhatikan tabel berikut.</p>
+<table>
+<thead>
+<tr>
+<th>Hak Akses</th>
+<th>rwx</th>
+<th>rw-</th>
+<th>r-x</th>
+<th>r--</th>
+<th>-wx</th>
+<th>-w-</th>
+<th>--x</th>
+<th>---</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Biner</td>
+<td>111</td>
+<td>110</td>
+<td>101</td>
+<td>100</td>
+<td>011</td>
+<td>010</td>
+<td>001</td>
+<td>000</td>
+</tr>
+<tr>
+<td>Desimal</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Pemberian hak akses menggunakan perintah chmod memiliki urutan UGO, yaitu user (u), group (g), dan other (o). Sehingga jika kita ingin memberikan hak akses read write dan executable untuk user, read dan executable untuk group, dan read untuk other, maka kita menggunakan angka 754. 7 untuk user (rwx), 5 untuk group (r-x), dan 4 untuk other (r--). Berikut contoh penggunaan perintah ini.</p>
+<ul>
+<li>Login sebagai root
+<div class="language-py highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">rehan</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">su</span> <span class="o">-</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="n">Password</span><span class="p">:</span>
+</span></code></pre></div></li>
+<li>Membuat folder baru
+<div class="language-py highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># cd /home</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># mkdir chmod_nomor</span>
+</span></code></pre></div></li>
+<li>
+<p>cek status hak akses
+<div class="language-py highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># ls -l</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">2</span> <span class="n">root</span>    <span class="n">root</span>      <span class="mi">4096</span> <span class="n">May</span> <span class="mi">23</span> <span class="mi">09</span><span class="p">:</span><span class="mi">08</span> <span class="n">chmod_nomor</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Merubah hak akses
+<div class="language-py highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># chmod 754 /home/chmod_nomor</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Cek kembali status hak akses
+<div class="language-py highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># ls -l</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">total</span> <span class="mi">52</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="n">drwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">--</span>  <span class="mi">2</span> <span class="n">root</span>    <span class="n">root</span>      <span class="mi">4096</span> <span class="n">May</span> <span class="mi">23</span> <span class="mi">09</span><span class="p">:</span><span class="mi">08</span> <span class="n">chmod_nomor</span>
+</span></code></pre></div></p>
+</li>
+</ul>
+<p>Terlihat sudah ada perubahan yang tadinya <code>drwxr-xr-x</code> menjadi <code>drwxr-xr--</code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Untuk memberikan hak akses juga ke subdirektori bisa menggunakan -R 
+<div class="language-py highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">chmod</span> <span class="mi">754</span> <span class="o">-</span><span class="n">R</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chmod_nomor</span>
+</span></code></pre></div></p>
+</div>
+<p>Kemudian dari <code>drwxr-xr--  2 root    root      4096 May 23 09:08 chmod_nomor</code> bagaimana kah pembagian hak aksesnya dan user mana saja yang terdampak?<br />
+Jika lihat kembali <code>rwx r-x r--</code> bisa diartikan bahwa :<br />
+- Folder <code>chmod_nomor</code> merupakan milik user <code>root</code> dan group <code>root</code><br />
+- <code>rwx</code> adalah hak akses untuk user Owner.<br />
+- <code>r-x</code> adalah hak akses untuk user Anggota Group.<br />
+- <code>r--</code> adalah hak akses untuk user selain dari user Owner dan anggota group.  </p>
+<p>Maka user yang terdampak <code>rwx</code> adalah user root sebagai user owner/pemilik dari folder <code>chmod_nomor</code>. Kemudian <code>r-x</code> yang terdampak adalah user yang tergabung didalam group <code>root</code>. Yang terakhir <code>r--</code> user yang terdampak adalah user <code>selain</code> dari pada user <code>root</code> dan juga user <code>yang tidak</code> tergabung didalam group <code>root</code> . </p>
+<h4 id="praktikum">Praktikum !!!</h4>
+<ol>
+<li>
+<p>Buatlah 2 buah user dengan nama chmod1 dan chmod2.
+<div class="language-py highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="n">rehan</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">su</span> <span class="o">-</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="n">Password</span><span class="p">:</span>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># useradd chmod1</span>
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># passwd chmod1</span>
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="n">New</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="n">Retype</span> <span class="n">new</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="n">passwd</span><span class="p">:</span> <span class="n">password</span> <span class="n">updated</span> <span class="n">successfully</span>
+</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a>
+</span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># useradd chmod2</span>
+</span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># passwd chmod2</span>
+</span><span id="__span-32-11"><a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a><span class="n">New</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-32-12"><a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a><span class="n">Retype</span> <span class="n">new</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-32-13"><a id="__codelineno-32-13" name="__codelineno-32-13" href="#__codelineno-32-13"></a><span class="n">passwd</span><span class="p">:</span> <span class="n">password</span> <span class="n">updated</span> <span class="n">successfully</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>buat group dengan nama chmodders
+<div class="language-py highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># groupadd chmodders</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>memasukkan chmod1 dan chmod2 kedalam group chmodders
+<div class="language-py highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># adduser chmod1 chmodders</span>
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="n">Adding</span> <span class="n">user</span> <span class="err">`</span><span class="n">chmod1</span><span class="s1">&#39; to group `chmodders&#39;</span> <span class="o">...</span>
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="n">Adding</span> <span class="n">user</span> <span class="n">chmod1</span> <span class="n">to</span> <span class="n">group</span> <span class="n">chmodders</span>
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="n">Done</span><span class="o">.</span>
+</span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>
+</span><span id="__span-34-6"><a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># adduser chmod2 chmodders</span>
+</span><span id="__span-34-7"><a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="n">Adding</span> <span class="n">user</span> <span class="err">`</span><span class="n">chmod2</span><span class="s1">&#39; to group `chmodders&#39;</span> <span class="o">...</span>
+</span><span id="__span-34-8"><a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a><span class="n">Adding</span> <span class="n">user</span> <span class="n">chmod2</span> <span class="n">to</span> <span class="n">group</span> <span class="n">chmodders</span>
+</span><span id="__span-34-9"><a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a><span class="n">Done</span><span class="o">.</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>buatlah sebuah folder di /home dengan nama <code>chmodders1</code> dan <code>chmodder2</code>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># cd /home</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># mkdir chmodders1 chmodders2</span>
+</span></code></pre></div></p>
+</li>
+<li>ubah kepemilikan folder <code>chmodders1</code> menjadi milik user <code>chmod1</code> dan group <code>chmodders</code>.
+<div class="language-py highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># chown -R chmod1:chmodders /home/chmodders1</span>
+</span></code></pre></div></li>
+<li>Ubah kepemilikan folder <code>chmodders2</code> menjadi milik user <code>chmod2</code> dan group <code>chmodders</code>.
+<div class="language-py highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># chown -R chmod2:chmodders /home/chmodders2</span>
+</span></code></pre></div></li>
+<li>Mengubah hak akses folder <code>chmodders1</code> menjadi<br />
+(u) user = Bisa read, write, execute<br />
+(g) Group = bisa read saja<br />
+(o) Others = tidak bisa melakukan apa apa.
+ <div class="language-py highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="c1"># chmod 740 -R /home/chmodders1</span>
+</span></code></pre></div></li>
+<li>Buktikan hak akses user pada folder `chmodders1
+<div class="language-py highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># su - chmod1</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="n">su</span><span class="p">:</span> <span class="n">warning</span><span class="p">:</span> <span class="n">cannot</span> <span class="n">change</span> <span class="n">directory</span> <span class="n">to</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chmod1</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span>
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="err">$</span> <span class="n">cd</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chmodders1</span>
+</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="err">$</span> <span class="n">touch</span> <span class="n">chmod</span><span class="o">.</span><span class="n">txt</span>
+</span><span id="__span-39-5"><a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="err">$</span> <span class="n">ls</span>
+</span><span id="__span-39-6"><a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a><span class="n">chmod</span><span class="o">.</span><span class="n">txt</span>
+</span><span id="__span-39-7"><a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a><span class="err">$</span>
+</span></code></pre></div></li>
+<li>
+<p>Buktikan Hak Akses group pada folder <code>chmodders1</code>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="err">$</span> <span class="n">su</span> <span class="o">-</span> <span class="n">chmod2</span>
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="n">Password</span><span class="p">:</span>
+</span><span id="__span-40-3"><a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="n">su</span><span class="p">:</span> <span class="n">warning</span><span class="p">:</span> <span class="n">cannot</span> <span class="n">change</span> <span class="n">directory</span> <span class="n">to</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chmod2</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span>
+</span><span id="__span-40-4"><a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="err">$</span> <span class="n">cd</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chmodders1</span>
+</span><span id="__span-40-5"><a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="o">-</span><span class="n">sh</span><span class="p">:</span> <span class="mi">1</span><span class="p">:</span> <span class="n">cd</span><span class="p">:</span> <span class="n">can</span><span class="s1">&#39;t cd to /home/chmodders1</span>
+</span><span id="__span-40-6"><a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a><span class="err">$</span> <span class="n">ls</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chmodders1</span>
+</span><span id="__span-40-7"><a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a><span class="n">chmod</span><span class="o">.</span><span class="n">txt</span>
+</span><span id="__span-40-8"><a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a><span class="err">$</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>Buktikan hak akses Others pada folder <code>chmodders2</code>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># adduser testing</span>
+</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="n">Adding</span> <span class="n">user</span> <span class="err">`</span><span class="n">testing</span><span class="s1">&#39; ...</span>
+</span><span id="__span-41-3"><a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="n">Adding</span> <span class="n">new</span> <span class="n">group</span> <span class="err">`</span><span class="n">testing</span><span class="s1">&#39; (1021) ...</span>
+</span><span id="__span-41-4"><a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="n">Adding</span> <span class="n">new</span> <span class="n">user</span> <span class="err">`</span><span class="n">testing</span><span class="s1">&#39; (1013) with group `testing&#39;</span> <span class="o">...</span>
+</span><span id="__span-41-5"><a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="n">Creating</span> <span class="n">home</span> <span class="n">directory</span> <span class="err">`</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">testing</span><span class="s1">&#39; ...</span>
+</span><span id="__span-41-6"><a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="n">Copying</span> <span class="n">files</span> <span class="kn">from</span> <span class="err">`</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">skel</span><span class="s1">&#39; ...</span>
+</span><span id="__span-41-7"><a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="n">New</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-41-8"><a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a><span class="n">Retype</span> <span class="n">new</span> <span class="n">password</span><span class="p">:</span>
+</span><span id="__span-41-9"><a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a><span class="n">passwd</span><span class="p">:</span> <span class="n">password</span> <span class="n">updated</span> <span class="n">successfully</span>
+</span><span id="__span-41-10"><a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a><span class="n">Changing</span> <span class="n">the</span> <span class="n">user</span> <span class="n">information</span> <span class="k">for</span> <span class="n">testing</span>
+</span><span id="__span-41-11"><a id="__codelineno-41-11" name="__codelineno-41-11" href="#__codelineno-41-11"></a><span class="n">Enter</span> <span class="n">the</span> <span class="n">new</span> <span class="n">value</span><span class="p">,</span> <span class="ow">or</span> <span class="n">press</span> <span class="n">ENTER</span> <span class="k">for</span> <span class="n">the</span> <span class="n">default</span>
+</span><span id="__span-41-12"><a id="__codelineno-41-12" name="__codelineno-41-12" href="#__codelineno-41-12"></a>        <span class="n">Full</span> <span class="n">Name</span> <span class="p">[]:</span>
+</span><span id="__span-41-13"><a id="__codelineno-41-13" name="__codelineno-41-13" href="#__codelineno-41-13"></a>        <span class="n">Room</span> <span class="n">Number</span> <span class="p">[]:</span>
+</span><span id="__span-41-14"><a id="__codelineno-41-14" name="__codelineno-41-14" href="#__codelineno-41-14"></a>        <span class="n">Work</span> <span class="n">Phone</span> <span class="p">[]:</span>
+</span><span id="__span-41-15"><a id="__codelineno-41-15" name="__codelineno-41-15" href="#__codelineno-41-15"></a>        <span class="n">Home</span> <span class="n">Phone</span> <span class="p">[]:</span>
+</span><span id="__span-41-16"><a id="__codelineno-41-16" name="__codelineno-41-16" href="#__codelineno-41-16"></a>        <span class="n">Other</span> <span class="p">[]:</span>
+</span><span id="__span-41-17"><a id="__codelineno-41-17" name="__codelineno-41-17" href="#__codelineno-41-17"></a><span class="n">Is</span> <span class="n">the</span> <span class="n">information</span> <span class="n">correct</span><span class="err">?</span> <span class="p">[</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">]</span> <span class="n">Y</span>
+</span><span id="__span-41-18"><a id="__codelineno-41-18" name="__codelineno-41-18" href="#__codelineno-41-18"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># su - testing</span>
+</span><span id="__span-41-19"><a id="__codelineno-41-19" name="__codelineno-41-19" href="#__codelineno-41-19"></a><span class="n">testing</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">cd</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chmodders1</span>
+</span><span id="__span-41-20"><a id="__codelineno-41-20" name="__codelineno-41-20" href="#__codelineno-41-20"></a><span class="o">-</span><span class="n">bash</span><span class="p">:</span> <span class="n">cd</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chmodders1</span><span class="p">:</span> <span class="n">Permission</span> <span class="n">denied</span>
+</span><span id="__span-41-21"><a id="__codelineno-41-21" name="__codelineno-41-21" href="#__codelineno-41-21"></a><span class="n">testing</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">ls</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chmodders1</span>
+</span><span id="__span-41-22"><a id="__codelineno-41-22" name="__codelineno-41-22" href="#__codelineno-41-22"></a><span class="n">ls</span><span class="p">:</span> <span class="n">cannot</span> <span class="nb">open</span> <span class="n">directory</span> <span class="s1">&#39;/home/chmodders1&#39;</span><span class="p">:</span> <span class="n">Permission</span> <span class="n">denied</span>
+</span></code></pre></div></p>
+</li>
+</ol>
+<h3 id="chmod-symbolic">chmod symbolic</h3>
+<p>Metode symbolic menggunakan huruf untuk membedakan hak akses, <code>u</code> untuk user, <code>g</code> untuk group, <code>o</code> untuk others dan <code>a</code> untuk semua.</p>
+<p>Dengan metode symbolic, kita tidak perlu memberikan hak akses secara utuh/lengkap (u,g,o,a). Kita dapat menambahkan dan mengurangi hak akses dengan <code>+</code> dan <code>-</code> atau <code>=</code> apabila ingin memberikan hak akses secara utuh/lengkap.</p>
+<p>Jika di metode numeric kita menggunakan angka untuk hak aksesnya, maka pada mode symbolic kita bisa menggunakan <code>r</code> untuk read, <code>w</code> untuk write, kemudian <code>x</code> untuk execute.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ketika menggunakan chmod symbolic, gunakan <code>X</code> besar untuk memberikan hak akses <code>execute</code>(search) pada sebuah directory/folder. chmod juga bisa menggunakan options <code>-R</code>(recursive).</p>
+</div>
+<p>Examples :  </p>
+<ol>
+<li>menghapus hak akses <code>read</code> dan <code>write</code> untuk user pada folder <code>/home/chmodders2</code>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># chmod u-rw /home/chmodders2</span>
+</span><span id="__span-42-2"><a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># ls -ld /home/chmodders2</span>
+</span><span id="__span-42-3"><a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="n">d</span><span class="o">--</span><span class="n">xr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span> <span class="mi">2</span> <span class="n">chmod2</span> <span class="n">chmodders</span> <span class="mi">4096</span> <span class="n">May</span> <span class="mi">24</span> <span class="mi">09</span><span class="p">:</span><span class="mi">28</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chmodders2</span>
+</span></code></pre></div></li>
+<li>Buktikan hak akses user terhadap folder <code>/home/chmodders</code>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># su - chmod2</span>
+</span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="n">su</span><span class="p">:</span> <span class="n">warning</span><span class="p">:</span> <span class="n">cannot</span> <span class="n">change</span> <span class="n">directory</span> <span class="n">to</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chmod2</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span>
+</span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="err">$</span> <span class="n">cd</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chmodders2</span>
+</span><span id="__span-43-4"><a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="err">$</span> <span class="n">ls</span>
+</span><span id="__span-43-5"><a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a><span class="n">ls</span><span class="p">:</span> <span class="n">cannot</span> <span class="nb">open</span> <span class="n">directory</span> <span class="s1">&#39;.&#39;</span><span class="p">:</span> <span class="n">Permission</span> <span class="n">denied</span>
+</span><span id="__span-43-6"><a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a><span class="err">$</span> <span class="n">mkdir</span> <span class="n">something</span>
+</span><span id="__span-43-7"><a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a><span class="n">mkdir</span><span class="p">:</span> <span class="n">cannot</span> <span class="n">create</span> <span class="n">directory</span> <span class="err">‘</span><span class="n">something</span><span class="err">’</span><span class="p">:</span> <span class="n">Permission</span> <span class="n">denied</span>
+</span><span id="__span-43-8"><a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a><span class="err">$</span> <span class="n">ls</span> <span class="o">-</span><span class="n">l</span>
+</span><span id="__span-43-9"><a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a><span class="n">ls</span><span class="p">:</span> <span class="n">cannot</span> <span class="nb">open</span> <span class="n">directory</span> <span class="s1">&#39;.&#39;</span><span class="p">:</span> <span class="n">Permission</span> <span class="n">denied</span>
+</span><span id="__span-43-10"><a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a><span class="err">$</span>
+</span></code></pre></div></li>
+<li>Menambahkan hak akses <code>rwx</code> pada <code>group</code> dan <code>others</code> terhadap folder <code>/home/chmodders2</code>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="err">$</span> <span class="n">su</span> <span class="o">-</span>
+</span><span id="__span-44-2"><a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="n">Password</span><span class="p">:</span>
+</span><span id="__span-44-3"><a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># chmod go+rwX /home/chmodders2</span>
+</span><span id="__span-44-4"><a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="n">root</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="c1"># ls -ld /home/chmodders2</span>
+</span><span id="__span-44-5"><a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="n">d</span><span class="o">--</span><span class="n">xrwxrwx</span> <span class="mi">2</span> <span class="n">chmod2</span> <span class="n">chmodders</span> <span class="mi">4096</span> <span class="n">May</span> <span class="mi">24</span> <span class="mi">09</span><span class="p">:</span><span class="mi">28</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chmodders2</span>
+</span></code></pre></div></li>
+</ol>
+<h3 id="tugas-mandiri-2">Tugas Mandiri #2</h3>
+<ol>
+<li>Buat folder dengan nama <code>tug4s</code>didalam <code>/home</code> kemudian buat file txt didalamnya.</li>
+<li>Buat lah group baru dengan nama <code>group_tug4s</code>.</li>
+<li>Masukkan user <code>tono</code> <code>tina</code> <code>tini</code> kedalam group <code>tugas</code>.</li>
+<li>Ubahlah kepemilikan folder <code>tug4s</code> secara recursive menjadi kepemilikan user <code>student</code>  dan group <code>group_tug4s</code>.</li>
+<li>Ubahlah permission/hak akses user <code>[rwx]</code> , group <code>[r--]</code> , others <code>[-wx]</code> terhadap folder <code>tug4s</code> secara recursive.</li>
+<li>Buktikan hak akses <code>user</code> terhadap folder <code>tug4s</code></li>
+<li>Buktikan hak akses <code>group</code> terhadap folder <code>tug4s</code></li>
+<li>Buktikan hak akses <code>others</code> terhadap folder <code>tug4s</code></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Seperti biasa kumpulkan di channel #pengumpulan tugas</p>
+</div>
+<h2 id="default-file-permissions">Default File Permissions</h2>
+<p>Ketika kita membuat file atau folder baru, sistem akan memberikan hak-akses secara default. Jika yang kita buat adalah <code>direktori</code> maka sistem akan memberikan hak akses <code>0777</code> (drwxrwxrwx). Jika yang kita buat adalah <code>file</code> maka sistem akan memberikan hak akses <code>0666</code> (-rw-rw-rw-). Untuk keamanan, sistem tidak akan memberikan hak akses excecute/<code>x</code> pada <code>file</code>. </p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b4d07000.min.js"></script>
+      
+    
+  </body>
+</html>
