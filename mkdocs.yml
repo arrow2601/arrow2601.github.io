@@ -29,4 +29,7 @@ theme:
       quote: octicons/quote-16
   features:
     - content.code.copy
+
+extra_css:
+  - custom.css 
   
