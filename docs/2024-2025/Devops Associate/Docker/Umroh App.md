@@ -13,6 +13,7 @@ root@debianMaster:~/rihlatul-app# git clone https://github.com/SMKMADINATULQURAN
 ```
 root@debianMaster:~/rihlatul-app# nano FE-Kelompok-Umroh/.env.production
 ```
+```
 # SECRET KEY
 NEXTAUTH_SECRET=dofbhkgjnosjgdklnsmgojdfkhglnsgnvfvsdkn
 
@@ -22,7 +23,7 @@ NEXTAUTH_URL=http://192.168.10.1:5555
 # URL API
 ```
 
-```
+
 ## Membuat file .envBE untuk BE
 ```
 root@debianMaster:~/rihlatul-app# nano .envBE
