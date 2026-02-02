@@ -104,6 +104,10 @@ ansible-lab/
 
 ## Inventory Multi Host
 
+```
+nano inventory
+```  
+
 ```ini
 [nginx]
 192.168.169.5
