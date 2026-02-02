@@ -252,7 +252,7 @@ Isi file berikut:
 
     - name: Install mysql-server
       apt:
-        name: mysql-server
+        name: mariadb-server
         state: present
 
     - name: Pastikan mysql berjalan
