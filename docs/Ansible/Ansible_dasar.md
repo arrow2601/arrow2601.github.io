@@ -594,7 +594,7 @@ Tambahkan 1 managed node baru:
 Gunakan repository berikut:
 
 ```
-https://github.com/dhiraj-01/Todo-PHP
+https://github.com/chapagain/crud-php-simple.git
 ```
 
 ---
