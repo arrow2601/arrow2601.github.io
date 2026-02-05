@@ -1,0 +1,5153 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../../2024-2025/repo/apt-cacher-ng/">
+      
+      
+        <link rel="next" href="../../../Ansible/Ansible_dasar/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>DHCP Server - Administrasi Server</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.5%201.75v11.5c0%20.138.112.25.25.25h3.17a.75.75%200%200%201%200%201.5H2.75A1.75%201.75%200%200%201%201%2013.25V1.75C1%20.784%201.784%200%202.75%200h8.5C12.216%200%2013%20.784%2013%201.75v7.736a.75.75%200%200%201-1.5%200V1.75a.25.25%200%200%200-.25-.25h-8.5a.25.25%200%200%200-.25.25m13.274%209.537zl-4.557%204.45a.75.75%200%200%201-1.055-.008l-1.943-1.95a.75.75%200%200%201%201.062-1.058l1.419%201.425%204.026-3.932a.75.75%200%201%201%201.048%201.074M4.75%204h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M4%207.75A.75.75%200%200%201%204.75%207h2a.75.75%200%200%201%200%201.5h-2A.75.75%200%200%201%204%207.75%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M3.499.75a.75.75%200%200%201%201.5%200v.996C5.9%202.903%206.793%203.65%207.662%204.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873%2010.794-.045%2012.622.26%2014.408.558%2016%201.94%2016%204.25c0%201.278-.954%202.575-2.44%202.734l.146.508.065.22c.203.701.412%201.455.476%202.226.142%201.707-.4%203.03-1.487%203.898C11.714%2014.671%2010.27%2015%208.75%2015h-6a.75.75%200%200%201%200-1.5h1.376a4.5%204.5%200%200%201-.563-1.191%203.84%203.84%200%200%201-.05-2.063%204.65%204.65%200%200%201-2.025-.293.75.75%200%200%201%20.525-1.406c1.357.507%202.376-.006%202.698-.318l.009-.01a.747.747%200%200%201%201.06%200%20.75.75%200%200%201-.012%201.074c-.912.92-.992%201.835-.768%202.586.221.74.745%201.337%201.196%201.621H8.75c1.343%200%202.398-.296%203.074-.836.635-.507%201.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4%202.4%200%200%201-.507-.441%203.1%203.1%200%200%201-.633-1.248.75.75%200%200%201%201.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738%200%201.25-.615%201.25-1.25%200-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706%201.345-.46.92-.27%201.774.019%203.062l.042.19.01.05c.348.443.666.949.94%201.553a.75.75%200%201%201-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7%205.527c-.814-.68-1.75-1.462-2.692-2.619a3.7%203.7%200%200%200-1.023.88c-.406.495-.663%201.036-.722%201.508.116.122.306.21.591.239.388.038.797-.06%201.032-.19a.75.75%200%200%201%20.728%201.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75%205.677V5.5c0-.984.48-1.94%201.077-2.664.46-.559%201.05-1.055%201.673-1.353z%22/%3E%3C/svg%3E');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M13.78%204.22a.75.75%200%200%201%200%201.06l-7.25%207.25a.75.75%200%200%201-1.06%200L2.22%209.28a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018L6%2010.94l6.72-6.72a.75.75%200%200%201%201.06%200%22/%3E%3C/svg%3E');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.92%206.085h.001a.749.749%200%201%201-1.342-.67c.169-.339.436-.701.849-.977C6.845%204.16%207.369%204%208%204a2.76%202.76%200%200%201%201.637.525c.503.377.863.965.863%201.725%200%20.448-.115.83-.329%201.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6%206%200%200%200-.26.16%201%201%200%200%200-.276.245.75.75%200%200%201-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1%201%200%200%200%20.277-.245C8.96%206.514%209%206.427%209%206.25a.61.61%200%200%200-.262-.525A1.27%201.27%200%200%200%208%205.5c-.369%200-.595.09-.74.187a1%201%200%200%200-.34.398M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.344%202.343za8%208%200%200%201%2011.314%2011.314A8.002%208.002%200%200%201%20.234%2010.089a8%208%200%200%201%202.11-7.746m1.06%2010.253a6.5%206.5%200%201%200%209.108-9.275%206.5%206.5%200%200%200-9.108%209.275M6.03%204.97%208%206.94l1.97-1.97a.749.749%200%200%201%201.275.326.75.75%200%200%201-.215.734L9.06%208l1.97%201.97a.749.749%200%200%201-.326%201.275.75.75%200%200%201-.734-.215L8%209.06l-1.97%201.97a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L6.94%208%204.97%206.03a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4.72.22a.75.75%200%200%201%201.06%200l1%20.999a3.5%203.5%200%200%201%202.441%200l.999-1a.748.748%200%200%201%201.265.332.75.75%200%200%201-.205.729l-.775.776c.616.63.995%201.493.995%202.444v.327q0%20.15-.025.292c.408.14.764.392%201.029.722l1.968-.787a.75.75%200%200%201%20.556%201.392L13%207.258V9h2.25a.75.75%200%200%201%200%201.5H13v.5q-.002.615-.141%201.186l2.17.868a.75.75%200%200%201-.557%201.392l-2.184-.873A5%205%200%200%201%208%2016a5%205%200%200%201-4.288-2.427l-2.183.873a.75.75%200%200%201-.558-1.392l2.17-.868A5%205%200%200%201%203%2011v-.5H.75a.75.75%200%200%201%200-1.5H3V7.258L.971%206.446a.75.75%200%200%201%20.558-1.392l1.967.787c.265-.33.62-.583%201.03-.722a1.7%201.7%200%200%201-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72%201.28a.75.75%200%200%201%200-1.06m.53%206.28a.75.75%200%200%200-.75.75V11a3.5%203.5%200%201%200%207%200V7.25a.75.75%200%200%200-.75-.75ZM6.173%205h3.654A.17.17%200%200%200%2010%204.827V4.5a2%202%200%201%200-4%200v.327c0%20.096.077.173.173.173%22/%3E%3C/svg%3E');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%205.782V2.5h-.25a.75.75%200%200%201%200-1.5h6.5a.75.75%200%200%201%200%201.5H11v3.282l3.666%205.76C15.619%2013.04%2014.543%2015%2012.767%2015H3.233c-1.776%200-2.852-1.96-1.899-3.458Zm-2.4%206.565a.75.75%200%200%200%20.633%201.153h9.534a.75.75%200%200%200%20.633-1.153L12.225%2010.5h-8.45ZM9.5%202.5h-3V6c0%20.143-.04.283-.117.403L4.73%209h6.54L9.617%206.403A.75.75%200%200%201%209.5%206Z%22/%3E%3C/svg%3E');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1.75%202.5h10.5a.75.75%200%200%201%200%201.5H1.75a.75.75%200%200%201%200-1.5m4%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5m0%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5M2.5%207.75v6a.75.75%200%200%201-1.5%200v-6a.75.75%200%200%201%201.5%200%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dhcp-server" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Administrasi Server" class="md-header__button md-logo" aria-label="Administrasi Server" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Administrasi Server
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DHCP Server
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Administrasi Server" class="md-nav__button md-logo" aria-label="Administrasi Server" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Administrasi Server
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2024 2025
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    2024 2025
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/linux-test-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kisi-kisi Soal UAS Kelas X Gasal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debian Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Debian Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Debian%20Server/1.%20Manajemen_User_Group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manajemen User dan Group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Debian%20Server/2.%20File%20Permission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Permission
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debian Server 2.0
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Debian Server 2.0
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1" id="__nav_2_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3   Manajemen User dan Group
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 3   Manajemen User dan Group
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Debian%20Server%202.0/Chapter%203%20-%20Manajemen%20User%20dan%20Group/1.%20Apa%20itu%20User%20dan%20Group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apa itu User dan Group?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Debian%20Server%202.0/Chapter%203%20-%20Manajemen%20User%20dan%20Group/2.%20Konfigurasi%20Sudo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sudo (Superuser do)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Debian%20Server%202.0/Chapter%203%20-%20Manajemen%20User%20dan%20Group/3.%20Manage%20Local%20Users%20and%20Group/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manage Local Users and Group
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Debian%20Server%202.0/Chapter%203%20-%20Manajemen%20User%20dan%20Group/4.%20Manajemen%20Password%20User/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manajemen Password User
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DevOps
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/DevOps/1.Deploy-Node-JS-App-Mysql-Crud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deploy Simple NodeJS App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/DevOps/2.Konfigurasi%20Domain%20Public/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Konfigurasi Domain Public
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/DevOps/3.%20Konfigurasi%20Mysql%20dan%20PhpMyAdmin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Konfigurasi Mysql dan PHPMyAdmin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/DevOps/4.%20Membuat%20Token%20Github/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Token Github
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/DevOps/5.%20Installasi%20GIT%20dan%20NodeJS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installasi Git dan NodeJS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/DevOps/6.%20Deploy-BE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deploy-BE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Devops Associate
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Devops Associate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_1" id="__nav_2_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Umroh%20App/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Umrah App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_1_2" id="__nav_2_5_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Dasar
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker Dasar
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Docker%20Dasar/1.%20Docker%20Image/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Image
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Docker%20Dasar/2.%20Docker%20Container/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Container
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Docker%20Dasar/3.%20Docker_Lab_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Lab 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Docker%20Dasar/4.%20Docker_Lab_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Lab 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Docker%20Dasar/5.%20Docker_Lab_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Lab 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Docker%20Dasar/6.%20Docker_Lab_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Lab 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Docker%20Dasar/7.%20Docker%20Network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Docker%20Dasar/8.%20Docker%20Volume/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Volume
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Docker%20Dasar/9.%20DockerFile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DockerFile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_1_3" id="__nav_2_5_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Dasar #2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_5_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker Dasar #2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Docker%20Dasar%20%232/1.%20SSH%20Using%20VS-Code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH Using VS Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Docker%20Dasar%20%232/2.%20Hello-Docker%20App%28DockerFile%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hello Docker App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Docker%20Dasar%20%232/3.%20React-App%20%28dockerfile%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    React App
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Docker/Docker%20Dasar%20%232/4.%20Docker%20Compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_2" id="__nav_2_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jenkins
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Jenkins
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Jenkins/1.%20Installasi%20Ngrok/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installasi dan setup awal Ngrok
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Jenkins/2.%20jenkins%20geming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jenkins Gaming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Devops%20Associate/Jenkins/3.%20Monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring Promeotheus &amp; Grafana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kelas X
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Kelas X
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6_1" id="__nav_2_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1   Installasi Linux Debian
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 1   Installasi Linux Debian
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20X/Chapter%201%20-%20Installasi%20Linux%20Debian/1.%20Installasi%20Debian%20Server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installasi Debian Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6_2" id="__nav_2_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2   Initial Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 2   Initial Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20X/Chapter%202%20-%20Initial%20Setup/1.Initial-Setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Initial Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kelas XI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Kelas XI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_1" id="__nav_2_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1 Initial Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 1 Initial Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%201%20Initial%20Setup/1.Initial-Setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Initial Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_2" id="__nav_2_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 10 VPN Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 10 VPN Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%2010%20VPN%20Server/1.VPN%20PPTP%20Server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VPN PPTP (Point to Point)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_3" id="__nav_2_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2 SSH Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 2 SSH Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%202%20SSH%20Server/2.%20SSH-Server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_4" id="__nav_2_7_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3 DNS Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 3 DNS Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%203%20DNS%20Server/3.DNS-Server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%203%20DNS%20Server/4.DNS%20Master-Slave/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS Master/Slave
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%203%20DNS%20Server/5.Split-DNS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Split DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_5" id="__nav_2_7_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4 Web Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 4 Web Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_5_1" id="__nav_2_7_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4.1 Apache Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_7_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4.1 Apache Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%204%20Web%20Server/4.1%20Apache%20Server/1.web-server%20apache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_5_2" id="__nav_2_7_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4.2 Nginx Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_7_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4.2 Nginx Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%204%20Web%20Server/4.2%20Nginx%20Server/1.web-server%20nginx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Server NGINX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_6" id="__nav_2_7_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5 Database Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 5 Database Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%205%20Database%20Server/6.%20Installasi%20Mysql%20dan%20PhpMyAdmin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Konfigurasi Mysql dan PHPMyAdmin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%205%20Database%20Server/7.%20Manajemen%20Database%20Server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manajemen Database Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_7" id="__nav_2_7_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 6 Load Balancer
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 6 Load Balancer
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%206%20Load%20Balancer/1.%20Pengenalan-Load-Balancer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pengenalan Load Balancer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%206%20Load%20Balancer/2.%20Load-Balancer-HaProxy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Load Balancer dengan HaProxy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%206%20Load%20Balancer/3.%20Haproxy%20https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Haproxy SSL/TLS (HTTPS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_8" id="__nav_2_7_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 7 Mail Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 7 Mail Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%207%20Mail%20Server/1.%20Mail%20Server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mail Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_9" id="__nav_2_7_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 8 DHCP Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 8 DHCP Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%208%20DHCP%20Server/1.dhcp-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%208%20DHCP%20Server/2.dhcp-relay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP Relay
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7_10" id="__nav_2_7_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 9 Certificate Authority
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_7_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 9 Certificate Authority
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%209%20Certificate%20Authority/1.%20Certificate%20Authority/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apache2 TLS/SSL (HTTPS) dan Apache2 Authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%209%20Certificate%20Authority/2.%20FTP%20Server%20Over%20SSL-TLS%20%28FTPS%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FTP Over SSL/TLS (FTPS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%209%20Certificate%20Authority/3.%20Web%20Server%20via%20SSL-TLS%20%28HTTPS%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Server Over SSL/TLS (HTTPS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Kelas%20XI/Chapter%209%20Certificate%20Authority/4.%20Nginx%20https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nginx HTTPS &amp; Nginx Authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latihan Uas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Latihan Uas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Latihan%20Uas/uas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latihan UAS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RHCSA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    RHCSA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9_1" id="__nav_2_9_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1 Accessing Systems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_9_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapter 1 Accessing Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/RHCSA/Chapter%201%20Accessing%20Systems/1.%20Accessing%20Command%20Line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accessing the Command Line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/RHCSA/Chapter%201%20Accessing%20Systems/2.%20Configuring%20SSH%20Key-based%20Authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuring SSH Key-based Authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/RHCSA/Chapter%201%20Accessing%20Systems/3.%20Guided%20Exercise%20Configuring%20SSH%20Key-based%20Authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guided Exercise SSH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sys Admin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sys Admin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/Sys%20Admin/Chapter%201%20-%20Accessing%20the%20Command%20Line/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accessing The Command Line
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Repo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2024-2025/repo/apt-cacher-ng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APT Cacher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administrasi Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Administrasi Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. DHCP Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. DHCP Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP Server
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DHCP Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#konsep-dasar-dhcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Konsep Dasar DHCP Server
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Konsep Dasar DHCP Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-apa-itu-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Apa Itu DHCP?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-mengapa-dhcp-begitu-penting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Mengapa DHCP Begitu Penting?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-komponen-utama-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Komponen Utama DHCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-proses-kerja-dhcp-dora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Proses Kerja DHCP (DORA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bagian-2-dhcp-relay-agent-ketika-jaringan-kalian-tumbuh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian 2: DHCP Relay Agent: Ketika Jaringan Kalian Tumbuh
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bagian 2: DHCP Relay Agent: Ketika Jaringan Kalian Tumbuh">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-batasan-pesan-broadcast-dan-peran-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Batasan Pesan Broadcast dan Peran Router
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-solusi-dhcp-relay-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Solusi: DHCP Relay Agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-mengapa-menggunakan-dhcp-relay-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Mengapa Menggunakan DHCP Relay Agent?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bagian-3-tutorial-konfigurasi-dhcp-server-di-debian-lanjutan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian 3: Tutorial Konfigurasi DHCP Server di Debian (Lanjutan)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bagian 3: Tutorial Konfigurasi DHCP Server di Debian (Lanjutan)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-persiapan-awal-server-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Persiapan Awal Server DHCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-instalasi-paket-isc-dhcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Instalasi Paket isc-dhcp-server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-konfigurasi-interface-isc-dhcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Konfigurasi Interface isc-dhcp-server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-konfigurasi-file-utama-dhcp-server-dhcpdconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. Konfigurasi File Utama DHCP Server (dhcpd.conf)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-menguji-konfigurasi-dan-memulai-layanan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. Menguji Konfigurasi dan Memulai Layanan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-memeriksa-status-layanan-dan-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6. Memeriksa Status Layanan dan Log
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bagian-4-studi-kasus-praktikum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian 4: Studi Kasus Praktikum
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bagian 4: Studi Kasus Praktikum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#panduan-pengaturan-network-adapter-di-virtualbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Panduan Pengaturan Network Adapter di VirtualBox
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#praktikum-1-konfigurasi-dhcp-dasar-untuk-jaringan-kelas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Praktikum 1: Konfigurasi DHCP Dasar untuk Jaringan Kelas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#praktikum-2-dhcp-dengan-ip-reserved-static-lease" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Praktikum 2: DHCP dengan IP Reserved (Static Lease)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#praktikum-3-dhcp-dengan-multiple-subnet-menggunakan-dhcp-relay-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Praktikum 3: DHCP dengan Multiple Subnet menggunakan DHCP Relay Agent
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Praktikum 3: DHCP dengan Multiple Subnet menggunakan DHCP Relay Agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-persiapan-dhcp-server-vm-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Persiapan DHCP Server (VM 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-persiapan-routerdhcp-relay-agent-vm-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Persiapan Router/DHCP Relay Agent (VM 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-pengujian-klien-lab-b-vm-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Pengujian Klien Lab B (VM 3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-pemecahan-masalah-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. Pemecahan Masalah (Troubleshooting):
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ansible
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Ansible/Ansible_dasar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materi Pembelajaran Ansible Dasar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Ansible/Ansible_dasar_part2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible dasar Part2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Ansible/ansible_dasar_part_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ansible Dasar (lagi) PART I
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#konsep-dasar-dhcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Konsep Dasar DHCP Server
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Konsep Dasar DHCP Server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-apa-itu-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Apa Itu DHCP?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-mengapa-dhcp-begitu-penting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Mengapa DHCP Begitu Penting?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-komponen-utama-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Komponen Utama DHCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-proses-kerja-dhcp-dora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Proses Kerja DHCP (DORA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bagian-2-dhcp-relay-agent-ketika-jaringan-kalian-tumbuh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian 2: DHCP Relay Agent: Ketika Jaringan Kalian Tumbuh
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bagian 2: DHCP Relay Agent: Ketika Jaringan Kalian Tumbuh">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-batasan-pesan-broadcast-dan-peran-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Batasan Pesan Broadcast dan Peran Router
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-solusi-dhcp-relay-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Solusi: DHCP Relay Agent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-mengapa-menggunakan-dhcp-relay-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Mengapa Menggunakan DHCP Relay Agent?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bagian-3-tutorial-konfigurasi-dhcp-server-di-debian-lanjutan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian 3: Tutorial Konfigurasi DHCP Server di Debian (Lanjutan)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bagian 3: Tutorial Konfigurasi DHCP Server di Debian (Lanjutan)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-persiapan-awal-server-dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Persiapan Awal Server DHCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-instalasi-paket-isc-dhcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Instalasi Paket isc-dhcp-server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-konfigurasi-interface-isc-dhcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Konfigurasi Interface isc-dhcp-server
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-konfigurasi-file-utama-dhcp-server-dhcpdconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. Konfigurasi File Utama DHCP Server (dhcpd.conf)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-menguji-konfigurasi-dan-memulai-layanan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. Menguji Konfigurasi dan Memulai Layanan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-memeriksa-status-layanan-dan-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6. Memeriksa Status Layanan dan Log
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bagian-4-studi-kasus-praktikum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian 4: Studi Kasus Praktikum
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bagian 4: Studi Kasus Praktikum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#panduan-pengaturan-network-adapter-di-virtualbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Panduan Pengaturan Network Adapter di VirtualBox
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#praktikum-1-konfigurasi-dhcp-dasar-untuk-jaringan-kelas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Praktikum 1: Konfigurasi DHCP Dasar untuk Jaringan Kelas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#praktikum-2-dhcp-dengan-ip-reserved-static-lease" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Praktikum 2: DHCP dengan IP Reserved (Static Lease)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#praktikum-3-dhcp-dengan-multiple-subnet-menggunakan-dhcp-relay-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Praktikum 3: DHCP dengan Multiple Subnet menggunakan DHCP Relay Agent
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Praktikum 3: DHCP dengan Multiple Subnet menggunakan DHCP Relay Agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-persiapan-dhcp-server-vm-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Persiapan DHCP Server (VM 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-persiapan-routerdhcp-relay-agent-vm-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Persiapan Router/DHCP Relay Agent (VM 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-pengujian-klien-lab-b-vm-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Pengujian Klien Lab B (VM 3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-pemecahan-masalah-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. Pemecahan Masalah (Troubleshooting):
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dhcp-server">DHCP Server</h1>
+<hr />
+<h2 id="konsep-dasar-dhcp-server">Konsep Dasar DHCP Server</h2>
+<h3 id="11-apa-itu-dhcp">1.1. Apa Itu DHCP?</h3>
+<p><strong>DHCP (Dynamic Host Configuration Protocol)</strong> adalah protokol jaringan yang memungkinkan <strong>DHCP Server</strong> untuk secara otomatis memberikan konfigurasi jaringan (seperti alamat IP, subnet mask, gateway default, dan DNS server) kepada perangkat <strong>DHCP Client</strong> dalam sebuah jaringan. Pemberian konfigurasi ini bersifat "Dinamis" karena dilakukan secara otomatis dan fleksibel, tidak manual.</p>
+<h3 id="12-mengapa-dhcp-begitu-penting">1.2. Mengapa DHCP Begitu Penting?</h3>
+<p>Implementasi DHCP server adalah fondasi bagi jaringan modern yang efisien dan skalabel. Berikut adalah alasannya:</p>
+<ol>
+<li><strong>Efisiensi dan Penghematan Waktu</strong>:<ul>
+<li><strong>Automasi</strong>: Menghilangkan kebutuhan konfigurasi manual pada setiap perangkat, sangat efisien untuk jaringan besar.</li>
+<li><strong>Penyebaran Cepat</strong>: Perangkat baru dapat langsung terhubung dan mendapatkan konfigurasi dalam hitungan detik.</li>
+</ul>
+</li>
+<li><strong>Mengurangi Kesalahan Konfigurasi</strong>:<ul>
+<li><strong>Meminimalkan Konflik IP</strong>: Secara otomatis memastikan setiap klien mendapatkan alamat IP unik, menghindari konflik IP.</li>
+<li><strong>Konsistensi Konfigurasi</strong>: Semua klien mendapatkan konfigurasi yang seragam dari satu sumber terpusat.</li>
+</ul>
+</li>
+<li><strong>Manajemen Alamat IP yang Fleksibel</strong>:<ul>
+<li><strong>Re-use IP</strong>: Alamat IP yang tidak terpakai dapat dikembalikan ke <em>pool</em> dan didistribusikan kembali, memaksimalkan penggunaan alamat IP terbatas.</li>
+<li><strong>Perubahan Konfigurasi Mudah</strong>: Perubahan konfigurasi (misalnya gateway atau DNS) cukup dilakukan di DHCP server dan akan disebarkan ke semua klien saat mereka memperbarui <em>lease</em>.</li>
+</ul>
+</li>
+<li><strong>Mendukung Skalabilitas</strong>: Sangat penting untuk jaringan besar yang sering mengalami penambahan atau pengurangan perangkat.</li>
+<li><strong>Mobilitas Perangkat</strong>: Perangkat bergerak dapat mulus berpindah antar jaringan tanpa konfigurasi manual.</li>
+</ol>
+<hr />
+<h3 id="13-komponen-utama-dhcp">1.3. Komponen Utama DHCP</h3>
+<p>Untuk memahami cara kerja DHCP, penting untuk mengetahui komponen-komponen dasarnya:</p>
+<ul>
+<li><strong>DHCP Server</strong>: Komputer atau perangkat jaringan yang menjalankan layanan DHCP. Ia memiliki <em>database</em> alamat IP yang tersedia dan bertanggung jawab untuk mendistribusikannya.</li>
+<li><strong>DHCP Client</strong>: Perangkat yang meminta dan menerima konfigurasi jaringan dari DHCP server (contoh: komputer, laptop, smartphone, printer jaringan, IP Camera).</li>
+<li><strong>IP Pool / Scope</strong>: Rentang alamat IP yang telah ditentukan oleh administrator untuk didistribusikan secara otomatis kepada klien (misalnya, 192.168.1.100 hingga 192.168.1.200).</li>
+<li><strong>Lease Time</strong>: Durasi waktu sebuah alamat IP "dipinjamkan" kepada klien. Setelah <em>lease time</em> berakhir, klien harus memperbarui <em>lease</em> atau meminta alamat IP baru.</li>
+<li><strong>Reserved IP (Static Lease / Reservation)</strong>: Kemampuan DHCP server untuk selalu memberikan alamat IP spesifik kepada perangkat tertentu berdasarkan <strong>MAC Address</strong>-nya. Berguna untuk server atau perangkat yang memerlukan IP tetap.</li>
+</ul>
+<hr />
+<h3 id="14-proses-kerja-dhcp-dora">1.4. Proses Kerja DHCP (DORA)</h3>
+<p>Komunikasi antara DHCP Client dan DHCP Server mengikuti empat langkah dasar yang dikenal dengan akronim <strong>DORA</strong>:</p>
+<ol>
+<li><strong>D - Discover (Penemuan)</strong>:<ul>
+<li>DHCP Client mengirimkan pesan <strong>DHCP Discover</strong> (broadcast) ke seluruh jaringan lokal untuk mencari DHCP server yang tersedia. Klien belum memiliki alamat IP, sehingga berkomunikasi secara broadcast.</li>
+</ul>
+</li>
+<li><strong>O - Offer (Penawaran)</strong>:<ul>
+<li>DHCP Server yang menerima pesan Discover akan merespons dengan pesan <strong>DHCP Offer</strong>. Pesan ini berisi penawaran alamat IP yang tersedia beserta informasi konfigurasi lainnya (subnet mask, gateway, DNS).</li>
+</ul>
+</li>
+<li><strong>R - Request (Permintaan)</strong>:<ul>
+<li>DHCP Client memilih salah satu tawaran (jika ada beberapa) dan mengirimkan pesan <strong>DHCP Request</strong> (broadcast). Pesan ini mengkonfirmasi alamat IP yang diinginkan kepada server yang dipilih, dan secara implisit memberitahu server lain bahwa tawarannya tidak diterima.</li>
+</ul>
+</li>
+<li><strong>A - Acknowledge (Pengakuan/Konfirmasi)</strong>:<ul>
+<li>DHCP Server yang tawarannya diterima akan mengirimkan pesan <strong>DHCP Acknowledge (DHCP ACK)</strong>. Ini adalah konfirmasi akhir bahwa alamat IP telah resmi diberikan kepada klien, lengkap dengan semua konfigurasi jaringan yang diminta.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="bagian-2-dhcp-relay-agent-ketika-jaringan-kalian-tumbuh">Bagian 2: DHCP Relay Agent: Ketika Jaringan Kalian Tumbuh</h2>
+<h3 id="21-batasan-pesan-broadcast-dan-peran-router">2.1. Batasan Pesan Broadcast dan Peran Router</h3>
+<p>Pesan <strong>DHCP Discover</strong> yang dikirim oleh klien bersifat <strong>broadcast</strong>, dan ini menimbulkan masalah di jaringan yang lebih kompleks:</p>
+<ul>
+<li><strong>Broadcast tidak dapat melintasi router</strong>. Router didesain untuk memisahkan domain broadcast.</li>
+<li><strong>Implikasinya</strong>: Jika DHCP server berada di subnet yang berbeda dari klien, permintaan DHCP Discover dari klien tidak akan pernah sampai ke DHCP server, sehingga klien tidak akan mendapatkan alamat IP.</li>
+</ul>
+<hr />
+<h3 id="22-solusi-dhcp-relay-agent">2.2. Solusi: DHCP Relay Agent</h3>
+<p>Untuk mengatasi batasan ini, kita menggunakan <strong>DHCP Relay Agent</strong>.</p>
+<ul>
+<li><strong>Apa itu DHCP Relay Agent?</strong> Ini adalah perangkat (bisa berupa router, switch Layer 3, atau server) yang dipasang di subnet tempat DHCP Client berada, tetapi tidak ada DHCP server di sana.</li>
+<li><strong>Fungsi Utama</strong>: DHCP Relay Agent bertindak sebagai "jembatan" atau "perantara" untuk lalu lintas DHCP antara dua subnet yang berbeda.<ol>
+<li>Ia menerima pesan <strong>DHCP Discover</strong> (broadcast) dari klien di subnet lokalnya.</li>
+<li>Ia mengubah pesan broadcast tersebut menjadi pesan <strong>unicast</strong> (yang dapat di-<em>routing</em> oleh router) dan meneruskannya ke alamat IP DHCP server yang sebenarnya (yang berada di subnet lain).</li>
+<li>Ketika DHCP server merespons (dengan DHCP Offer/ACK), Relay Agent akan menerima balasan tersebut dan meneruskannya kembali ke klien yang meminta di subnet lokalnya.</li>
+</ol>
+</li>
+</ul>
+<hr />
+<h3 id="23-mengapa-menggunakan-dhcp-relay-agent">2.3. Mengapa Menggunakan DHCP Relay Agent?</h3>
+<ul>
+<li><strong>Sentralisasi Manajemen IP</strong>: Memungkinkan satu DHCP server terpusat untuk melayani beberapa subnet, menyederhanakan manajemen dan <em>troubleshooting</em>.</li>
+<li><strong>Efisiensi Sumber Daya</strong>: Tidak perlu menginstal DHCP server di setiap subnet, menghemat sumber daya <em>hardware</em> dan <em>software</em>.</li>
+<li><strong>Fleksibilitas Desain Jaringan</strong>: Memungkinkan desain jaringan yang lebih kompleks dan terdistribusi tanpa mengorbankan fungsionalitas DHCP.</li>
+</ul>
+<h2 id="bagian-3-tutorial-konfigurasi-dhcp-server-di-debian-lanjutan">Bagian 3: Tutorial Konfigurasi DHCP Server di Debian (Lanjutan)</h2>
+<p>Kita akan menggunakan paket <code>isc-dhcp-server</code>, implementasi DHCP server paling umum di Linux.</p>
+<hr />
+<h3 id="31-persiapan-awal-server-dhcp">3.1. Persiapan Awal Server DHCP</h3>
+<ul>
+<li><strong>Sistem Operasi</strong>: Debian 11 (Bullseye) atau versi lebih baru.</li>
+<li><strong>Akses Root</strong>: Gunakan <code></code> untuk perintah instalasi dan konfigurasi.</li>
+<li><strong>Kartu Jaringan (NIC)</strong>: DHCP server <strong>HARUS</strong> memiliki alamat IP statis agar klien dapat menemukannya secara konsisten.</li>
+</ul>
+<p><strong>Konfigurasi IP Statis</strong>:</p>
+<ol>
+<li>Edit file <code>/etc/network/interfaces</code>:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">  </span>nano<span class="w"> </span>/etc/network/interfaces
+</span></code></pre></div></li>
+<li>
+<p>Tambahkan atau modifikasi baris berikut (sesuaikan dengan nama <em>interface</em> kalian, misal <code>enp0s3</code> atau <code>eth0</code>). Gunakan IP untuk DHCP Server: <strong>192.168.10.1</strong>.</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a># The primary network interface for DHCP services
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>auto enp0s3
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>iface enp0s3 inet dhcp
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>auto enp0s8
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>iface enp0s8 inet static
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    address 192.168.10.1
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    netmask 255.255.255.0
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    # Gateway dan DNS opsional jika server ini hanya untuk layanan DHCP dan tidak perlu akses internet atau jaringan luar.
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    # Jika perlu internet untuk apt update, tambahkan juga:
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    # gateway 192.168.10.254  # Gateway jaringan Anda
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    # dns-nameservers 8.8.8.8 8.8.4.4 # DNS Server eksternal
+</span></code></pre></div>
+3.  Simpan (<code>Ctrl+O</code>, Enter) dan keluar (<code>Ctrl+X</code>).
+4.  Restart layanan networking:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>  systemctl restart networking
+</span></code></pre></div>
+5.  Verifikasi IP: <code>ip a</code> atau <code>ip addr show enp0s8</code>.</p>
+</li>
+</ol>
+<hr />
+<h3 id="32-instalasi-paket-isc-dhcp-server">3.2. Instalasi Paket <code>isc-dhcp-server</code></h3>
+<p>Buka terminal dan jalankan perintah berikut:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">  </span>apt<span class="w"> </span>update<span class="w">          </span><span class="c1"># Perbarui daftar paket</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>apt<span class="w"> </span>install<span class="w"> </span>isc-dhcp-server<span class="w"> </span><span class="c1"># Instal paket DHCP server</span>
+</span></code></pre></div>
+<h3 id="33-konfigurasi-interface-isc-dhcp-server">3.3. Konfigurasi Interface isc-dhcp-server</h3>
+<p>Kita perlu memberitahu DHCP server di interface mana ia akan mendengarkan permintaan DHCP.</p>
+<p>Edit file /etc/default/isc-dhcp-server:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nano /etc/default/isc-dhcp-server
+</span></code></pre></div>
+Cari baris INTERFACESv4="" dan ubah menjadi nama interface yang terhubung ke jaringan tempat klien akan berada. Dalam kasus ini, enp0s8.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a># On what interfaces should the DHCP server (dhcpd) serve DHCP requests?
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a># Separate multiple interfaces with spaces, e.g. &quot;eth0 eth1&quot;.
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>INTERFACESv4=&quot;enp0s8&quot; # Ganti dengan nama interface server Anda
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>#INTERFACESv6=&quot;&quot; # Abaikan atau sesuaikan jika menggunakan IPv6
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Simpan dan keluar.
+</span></code></pre></div>
+<h3 id="34-konfigurasi-file-utama-dhcp-server-dhcpdconf">3.4. Konfigurasi File Utama DHCP Server (dhcpd.conf)</h3>
+<p>Ini adalah jantung konfigurasi DHCP server. File ini terletak di /etc/dhcp/dhcpd.conf.</p>
+<p>Sangat Penting: Selalu buat salinan cadangan file konfigurasi asli sebelum mengedit:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>  cp /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.bak
+</span></code></pre></div>
+Sekarang, edit file /etc/dhcp/dhcpd.conf:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>  nano /etc/dhcp/dhcpd.conf
+</span></code></pre></div>
+Anda dapat menghapus komentar-komentar bawaan untuk memudahkan pembacaan dan menambahkan konfigurasi berikut:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a># Opsi global untuk semua scope (berlaku untuk semua subnet yang didefinisikan)
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>default-lease-time 600;  # Waktu sewa default: 600 detik (10 menit)
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>max-lease-time 7200;   # Waktu sewa maksimum: 7200 detik (2 jam)
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a># Jika Anda memiliki server DNS, tentukan di sini
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>option domain-name-servers 8.8.8.8, 8.8.4.4; # Contoh: Google Public DNS
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>option domain-name &quot;smk.net&quot;; # Nama domain internal Anda (opsional)
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a># Nonaktifkan DNS dynamic update (biasanya tidak diperlukan untuk kasus sederhana)
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>ddns-update-style none;
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a># Deklarasi subnet untuk Lab A
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>subnet 192.168.10.0 netmask 255.255.255.0 {
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>    range 192.168.10.100 192.168.10.200; # Rentang IP yang akan didistribusikan
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>    option routers 192.168.10.254; # Alamat IP gateway default 
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>    option broadcast-address 192.168.10.255; # Alamat broadcast jaringan
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>}
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a># Contoh konfigurasi untuk host tertentu (reserved IP/Static Lease)
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a># host nama-komputer-siswa {
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>#   hardware ethernet AA:BB:CC:DD:EE:FF; # MAC Address komputer siswa (HARUS SAMA)
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>#   fixed-address 192.168.10.10; # Alamat IP yang akan selalu diberikan ke komputer ini
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a># }
+</span></code></pre></div>
+<p>Penjelasan Mendalam:</p>
+<ul>
+<li>
+<p>default-lease-time &amp; max-lease-time: Atur ini sesuai kebutuhan. Untuk lingkungan yang sering berubah (misal, kafe Wi-Fi), gunakan lease time pendek. Untuk jaringan stabil, lease time lebih panjang mengurangi overhead permintaan IP.</p>
+</li>
+<li>
+<p>option domain-name-servers: Ini memberitahu klien DNS server mana yang harus digunakan. Kalian bisa menggunakan DNS lokal atau publik.</p>
+</li>
+<li>
+<p>option domain-name: Memberikan nama domain ke klien, berguna untuk resolusi nama di jaringan internal.</p>
+</li>
+<li>
+<p>ddns-update-style none: Menonaktifkan fitur Dynamic DNS Update. Fitur ini memungkinkan DHCP server memperbarui catatan DNS secara otomatis saat IP dialokasikan, namun lebih kompleks dan jarang diperlukan untuk kasus dasar.</p>
+</li>
+<li>
+<p>subnet 192.168.10.0 netmask 255.255.255.0 { ... }: Ini adalah blok yang mendefinisikan sebuah subnet. Semua konfigurasi di dalamnya hanya berlaku untuk klien di subnet tersebut.</p>
+</li>
+<li>
+<p>range: Penting! Pastikan rentang ini TIDAK TUMPANG TINDIH dengan alamat IP statis DHCP server itu sendiri, router, atau perangkat lain yang sudah memiliki IP statis.</p>
+</li>
+<li>
+<p>option routers: Ini adalah konfigurasi vital yang memberitahu klien alamat IP gateway mereka untuk akses ke jaringan lain (termasuk internet).</p>
+</li>
+<li>
+<p>host nama-komputer-siswa { ... }: Digunakan untuk Static Lease. hardware ethernet harus persis sama dengan MAC address perangkat klien. fixed-address adalah IP yang akan selalu diberikan ke perangkat tersebut. Pastikan IP ini berada di luar rentang range agar tidak terjadi konflik dinamis.</p>
+</li>
+</ul>
+<p>Simpan dan keluar dari editor.</p>
+<h3 id="35-menguji-konfigurasi-dan-memulai-layanan">3.5. Menguji Konfigurasi dan Memulai Layanan</h3>
+<p>Selalu uji sintaks konfigurasi kalian untuk menghindari error fatal:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>  dhcpd -t -cf /etc/dhcp/dhcpd.conf
+</span></code></pre></div>
+Jika tidak ada output, berarti sintaksnya benar. Jika ada kesalahan, pesan error akan ditampilkan dengan nomor baris yang relevan.</p>
+<p>Setelah yakin konfigurasi benar, mulai dan aktifkan layanan DHCP server:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>  systemctl enable isc-dhcp-server  # Mengaktifkan layanan saat boot
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>  systemctl start isc-dhcp-server   # Memulai layanan sekarang
+</span></code></pre></div>
+<h3 id="36-memeriksa-status-layanan-dan-log">3.6. Memeriksa Status Layanan dan Log</h3>
+<p>Untuk memastikan layanan berjalan dengan baik dan tidak ada error:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>  systemctl status isc-dhcp-server
+</span></code></pre></div>
+Pastikan statusnya active (running). Jika ada masalah, periksa log untuk detail lebih lanjut:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>  journalctl -u isc-dhcp-server --no-pager
+</span></code></pre></div>
+<h2 id="bagian-4-studi-kasus-praktikum">Bagian 4: Studi Kasus Praktikum</h2>
+<p>Untuk semua praktikum, kita akan menggunakan <strong>VirtualBox</strong> untuk mensimulasikan lingkungan jaringan. Pastikan kalian sudah menginstal VirtualBox dan mengerti dasar pengoperasiannya.</p>
+<h3 id="panduan-pengaturan-network-adapter-di-virtualbox">Panduan Pengaturan Network Adapter di VirtualBox</h3>
+<p>Memahami mode jaringan di VirtualBox sangat krusial untuk simulasi jaringan:</p>
+<ul>
+<li><strong>NAT (Network Address Translation)</strong>: VM dapat mengakses internet melalui IP <em>host</em> (komputer fisik kalian), tetapi VM tidak dapat diakses dari luar (dari <em>host</em> atau VM lain di jaringan internal). Cocok untuk VM yang hanya perlu akses internet.</li>
+<li><strong>Bridge Adapter</strong>: VM berperilaku seperti komputer fisik terpisah di jaringan kalian. Ia mendapatkan IP dari <em>router</em> fisik kalian (jika ada DHCP server di jaringan fisik kalian) dan dapat berkomunikasi dengan perangkat lain di jaringan fisik kalian.</li>
+<li><strong>Internal Network</strong>: VM dapat berkomunikasi satu sama lain dalam jaringan virtual yang terisolasi, tetapi tidak dapat mengakses internet atau jaringan fisik <em>host</em>. Sangat cocok untuk simulasi jaringan lokal yang terisolasi. Kalian perlu memberi nama Internal Network (misalnya <code>LabA_Network</code>). VM yang menggunakan nama yang sama akan terhubung dalam satu segmen jaringan virtual.</li>
+<li><strong>Host-only Adapter</strong>: VM dapat berkomunikasi dengan <em>host</em> (komputer fisik kalian) dan VM lain yang terhubung ke adapter Host-only yang sama, tetapi tidak dapat mengakses internet atau jaringan fisik eksternal.</li>
+</ul>
+<p><strong>Langkah-langkah Mengatur Network Adapter pada VM di VirtualBox</strong>:</p>
+<ol>
+<li><strong>Pilih VM</strong>: Buka VirtualBox Manager, klik pada VM yang ingin diatur.</li>
+<li><strong>Buka Pengaturan</strong>: Klik "Settings" atau klik kanan VM dan pilih "Settings...".</li>
+<li><strong>Pilih Jaringan</strong>: Di jendela Settings, klik "Network".</li>
+<li><strong>Pilih Adapter</strong>: Pilih tab "Adapter X" (misal: Adapter 1, Adapter 2).</li>
+<li>Centang "Enable Network Adapter".</li>
+<li>Pilih "<strong>Attached to:</strong>". Di sini kalian pilih mode jaringan.</li>
+<li>Jika memilih <strong>Internal Network</strong>, berikan nama yang sama untuk semua VM yang ingin berada di jaringan virtual yang sama (misal: <code>LabA_Network</code>, <code>LabB_Network</code>).</li>
+</ol>
+<hr />
+<h3 id="praktikum-1-konfigurasi-dhcp-dasar-untuk-jaringan-kelas">Praktikum 1: Konfigurasi DHCP Dasar untuk Jaringan Kelas</h3>
+<p><strong>Tujuan</strong>: Siswa mampu menginstal dan mengkonfigurasi DHCP server untuk mendistribusikan alamat IP dinamis ke klien dalam satu <em>subnet</em>.</p>
+<p><strong>Skenario</strong>:
+Kalian adalah administrator jaringan di SMK. Kalian diminta menyiapkan DHCP server untuk lab komputer yang memiliki 20 komputer klien. Jaringan lab menggunakan <em>subnet</em> <code>192.168.10.0/24</code>. <em>Gateway</em> jaringan adalah <code>192.168.10.254</code>. DNS server yang akan digunakan adalah <code>8.8.8.8</code> (Google DNS) dan <code>8.8.4.4</code>. Rentang IP yang akan didistribusikan adalah dari <code>192.168.10.100</code> hingga <code>192.168.10.150</code>.</p>
+<p><strong>Topologi (Sederhana)</strong>:</p>
+<ul>
+<li><strong>VM 1: DHCP Server (Debian)</strong><ul>
+<li>Network Adapter2: <strong>Host Onlyy Adapter</strong> </li>
+<li>IP Statis: <code>192.168.10.1/24</code></li>
+</ul>
+</li>
+<li><strong>VM 2: Klien (Windows Host)</strong><ul>
+<li>IP Dinamis (DHCP)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Langkah-langkah Praktikum</strong>:</p>
+<ol>
+<li>
+<p><strong>Persiapan VM DHCP Server (VM 1)</strong>:</p>
+<ul>
+<li>Buat VM Debian baru.</li>
+<li>Di VirtualBox, atur <strong>Network Adapter 2</strong> menjadi <strong>Host Only Adapter</strong> . (Jika perlu akses internet untuk <code>apt update</code>, tambahkan Adapter 1 dengan mode NAT).</li>
+<li>Di dalam VM Debian, konfigurasi IP statis <code>192.168.10.1</code> dengan <em>netmask</em> <code>255.255.255.0</code> pada <em>interface</em> (misal <code>enp0s8</code>). Restart layanan <em>networking</em>.</li>
+<li>Instal paket <code>isc-dhcp-server</code>.</li>
+<li>Edit <code>/etc/default/isc-dhcp-server</code> dan tentukan <em>interface</em> yang digunakan (<code>INTERFACESv4="enp0s8"</code>).</li>
+<li>disable <code>dhcp server</code> pada host only adapter</li>
+</ul>
+</li>
+<li>
+<p><strong>Konfigurasi <code>dhcpd.conf</code> pada DHCP Server</strong>:</p>
+<ul>
+<li>Edit <code>/etc/dhcp/dhcpd.conf</code> dan terapkan konfigurasi berikut:</li>
+</ul>
+<div class="language-ini highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="na">default-lease-time 600;</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="na">max-lease-time 7200;</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="na">option domain-name-servers 8.8.8.8, 8.8.4.4;</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="na">option domain-name &quot;labsmk.local&quot;;</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="na">ddns-update-style none;</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="na">subnet 192.168.10.0 netmask 255.255.255.0 {</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="na">range 192.168.10.100 192.168.10.150;</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">    </span><span class="na">option routers 192.168.10.254;</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">    </span><span class="na">option broadcast-address 192.168.10.255;</span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="na">}</span>
+</span></code></pre></div>
+</li>
+<li>
+<p><strong>Uji Konfigurasi dan Start Layanan</strong>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="w">  </span>dhcpd<span class="w"> </span>-t<span class="w"> </span>-cf<span class="w"> </span>/etc/dhcp/dhcpd.conf<span class="w"> </span><span class="c1"># uji sintaks</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span>systemctl<span class="w"> </span>restart<span class="w"> </span>isc-dhcp-server
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span>systemctl<span class="w"> </span>status<span class="w"> </span>isc-dhcp-server<span class="w"> </span><span class="c1"># pastikan running</span>
+</span></code></pre></div>
+</li>
+<li>
+<p><strong>Pengujian Klien (Windows Host)</strong>:</p>
+<ul>
+<li>Di dalam VM Klien, atur pengaturan jaringan ke "<strong>Obtain an IP address automatically</strong>" (DHCP).
+<img alt="alt text" src="../image.png" /></li>
+<li>Verifikasi bahwa klien mendapatkan IP <code>192.168.10.x</code> dalam rentang yang ditentukan, serta <em>gateway</em> (<code>192.168.10.254</code>) dan DNS (<code>8.8.8.8</code>, <code>8.8.4.4</code>). (Gunakan <code>ip a</code> di Linux atau <code>ipconfig</code> di Windows).</li>
+<li>Coba <code>ping 192.168.10.1</code> (ke DHCP server).</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="praktikum-2-dhcp-dengan-ip-reserved-static-lease">Praktikum 2: DHCP dengan IP Reserved (Static Lease)</h3>
+<p><strong>Tujuan</strong>: Siswa mampu mengkonfigurasi DHCP server untuk memberikan alamat IP statis kepada klien tertentu berdasarkan MAC address-nya.</p>
+<p><strong>Skenario</strong>:
+Di lab yang sama, ada sebuah <em>print server</em> dan satu PC guru yang selalu memerlukan alamat IP yang sama agar mudah diakses. <em>Print server</em> memiliki MAC address <code>xx:xx:xx:xx:xx:xx</code> dan harus mendapatkan IP <code>192.168.10.50</code>. PC guru memiliki MAC address <code>xx:xx:xx:xx:xx:xx</code> dan harus mendapatkan IP <code>192.168.10.51</code>.</p>
+<p><strong>Langkah-langkah Praktikum</strong>:</p>
+<ol>
+<li>
+<p><strong>Lanjutkan dari Praktikum 1</strong>: Gunakan konfigurasi DHCP server yang sudah ada.</p>
+</li>
+<li>
+<p><strong>Identifikasi MAC Address Klien</strong>:</p>
+<ul>
+<li>Pada VM klien yang akan dijadikan "Print Server" dan "PC Guru", catat <strong>MAC address</strong> <em>interface</em> jaringannya yang terhubung ke <code>Host Only Adapter</code>. (Di Linux: <code>ip link show</code> atau <code>ifconfig</code>. Di Windows: <code>ipconfig /all</code> - cari "Physical Address"). Catat MAC address dengan format <code>xx:xx:xx:xx:xx:xx</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Modifikasi <code>dhcpd.conf</code> pada DHCP Server</strong>:</p>
+<ul>
+<li>Edit <code>/etc/dhcp/dhcpd.conf</code>.</li>
+<li>Di dalam blok <code>subnet 192.168.10.0</code>, tambahkan entri <code>host</code> untuk Print Server dan PC Guru. <strong>Ganti MAC address dengan yang sesungguhnya dari VM kalian!</strong></li>
+</ul>
+<p><div class="language-ini highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># ... (bagian konfigurasi subnet dari Praktikum 1) ...</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="c1"># Konfigurasi untuk Print Server</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="na">host print-server {</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">        </span><span class="na">hardware ethernet xx</span><span class="o">:</span><span class="s">xx:xx:xx:xx:xx</span><span class="c1">; # Ganti dengan MAC Address Print Server Anda</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">        </span><span class="na">fixed-address 192.168.10.50;</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">    </span><span class="na">}</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">    </span><span class="c1"># Konfigurasi untuk PC Guru</span>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="w">    </span><span class="na">host pc-guru {</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="w">        </span><span class="na">hardware ethernet xx</span><span class="o">:</span><span class="s">xx:xx:xx:xx:xx</span><span class="c1">; # Ganti dengan MAC Address PC Guru Anda</span>
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">        </span><span class="na">fixed-address 192.168.10.51;</span>
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="w">    </span><span class="na">}</span>
+</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="na">}</span>
+</span></code></pre></div>
+<strong>Penting</strong>: Pastikan <code>192.168.10.50</code> dan <code>192.168.10.51</code> berada di <strong>luar</strong> rentang <code>range 192.168.10.100 192.168.10.150</code> untuk menghindari konflik alokasi dinamis.</p>
+</li>
+<li>
+<p><strong>Uji Konfigurasi dan Restart Layanan</strong>:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="w">  </span>dhcpd<span class="w"> </span>-t<span class="w"> </span>-cf<span class="w"> </span>/etc/dhcp/dhcpd.conf
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span>systemctl<span class="w"> </span>restart<span class="w"> </span>isc-dhcp-server
+</span></code></pre></div>
+</li>
+<li>
+<p><strong>Pengujian Klien</strong>:</p>
+<ul>
+<li>Pada VM "Print Server" dan "PC Guru", pastikan pengaturan jaringan diatur ke DHCP.</li>
+<li>Restart <em>interface</em> jaringan klien (atau <em>reboot</em> VM).</li>
+<li>Periksa alamat IP yang diterima. Mereka harus mendapatkan <code>192.168.10.50</code> dan <code>192.168.10.51</code> masing-masing.</li>
+<li>Coba <em>ping</em> dari satu klien ke klien lainnya atau ke DHCP server.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="praktikum-3-dhcp-dengan-multiple-subnet-menggunakan-dhcp-relay-agent">Praktikum 3: DHCP dengan Multiple Subnet menggunakan DHCP Relay Agent</h3>
+<p><strong>Tujuan</strong>: Siswa mampu memahami dan mengkonfigurasi DHCP Relay Agent untuk memungkinkan klien di <em>subnet</em> yang berbeda mendapatkan alamat IP dari DHCP server terpusat.</p>
+<p><strong>Skenario</strong>:
+SMK kalian memiliki dua lab komputer yang berbeda, Lab A dan Lab B. Lab A menggunakan <em>subnet</em> <code>192.168.10.0/24</code> (tempat DHCP server berada), dan Lab B menggunakan <em>subnet</em> <code>192.168.20.0/24</code>. Kedua lab terhubung melalui sebuah <em>router</em>. Kalian ingin klien di Lab B juga mendapatkan IP dari DHCP server yang ada di Lab A.</p>
+<p><strong>Topologi Jaringan (Simulasi VM di VirtualBox)</strong>:</p>
+<ul>
+<li><strong>VM 1: DHCP Server (Debian)</strong><ul>
+<li>Network Adapter 1: <strong>NAT</strong> </li>
+<li>Network Adapter 2: <strong>Internal Network</strong> (Nama: <code>LabA_Network</code>)</li>
+<li>IP Statis: <code>192.168.10.1/24</code></li>
+</ul>
+</li>
+<li><strong>VM 2: Router/DHCP Relay Agent (Debian)</strong><ul>
+<li>Network Adapter 1: <strong>NAT</strong></li>
+<li>Network Adapter 2: <strong>Internal Network</strong> (Nama: <code>LabA_Network</code>) - IP Statis: <code>192.168.10.254/24</code></li>
+<li>Network Adapter 3: <strong>Internal Network</strong> (Nama: <code>LabB_Network</code>) - IP Statis: <code>192.168.20.254/24</code></li>
+<li><strong>Penting</strong>: IP Forwarding harus diaktifkan pada VM ini.</li>
+</ul>
+</li>
+<li><strong>VM 3: Klien Lab B (Debian)</strong><ul>
+<li>Network Adapter 1: <strong>Internal Network</strong> (Nama: <code>LabB_Network</code>)</li>
+<li>IP Dinamis (DHCP)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Langkah-langkah Praktikum</strong>:</p>
+<h4 id="a-persiapan-dhcp-server-vm-1">A. Persiapan DHCP Server (VM 1)</h4>
+<ol>
+<li><strong>Lanjutkan dari Praktikum 1 &amp; 2</strong>: Pastikan DHCP server kalian sudah berjalan di <em>subnet</em> <code>192.168.10.0/24</code>.</li>
+<li>
+<p><strong>Tambahkan Konfigurasi Subnet untuk Lab B</strong>:</p>
+<ul>
+<li>Edit file <code>/etc/dhcp/dhcpd.conf</code> pada DHCP Server (VM 1).</li>
+<li>Tambahkan blok <em>subnet</em> baru untuk Lab B:</li>
+</ul>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a># ... (konfigurasi subnet 192.168.10.0/24 dari Praktikum 1 &amp; 2) ...
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a># Deklarasi subnet untuk Lab B
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>subnet 192.168.20.0 netmask 255.255.255.0 {
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>    range 192.168.20.100 192.168.20.200; # Rentang IP untuk klien Lab B
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>    option routers 192.168.20.254; # Gateway untuk Lab B (IP interface router di Lab B)
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    option broadcast-address 192.168.20.255;
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    option domain-name-servers 8.8.8.8, 8.8.4.4; # DNS untuk klien Lab B
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>}
+</span></code></pre></div>
+Simpan dan keluar.
+3.  <strong>Uji Konfigurasi dan Restart Layanan DHCP Server</strong>:</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="w">  </span>dhcpd<span class="w"> </span>-t<span class="w"> </span>-cf<span class="w"> </span>/etc/dhcp/dhcpd.conf
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span>systemctl<span class="w"> </span>restart<span class="w"> </span>isc-dhcp-server
+</span></code></pre></div>
+Pastikan tidak ada <em>error</em>.</p>
+</li>
+</ol>
+<h4 id="b-persiapan-routerdhcp-relay-agent-vm-2">B. Persiapan Router/DHCP Relay Agent (VM 2)</h4>
+<ol>
+<li><strong>Instalasi Debian VM</strong>: Clone VM Debian baru yang akan berfungsi sebagai <em>router</em>/relay.</li>
+<li><strong>Konfigurasi Network Adapter di VirtualBox</strong>:<ul>
+<li>Pastikan VM ini memiliki 3 Network Adapter:<ul>
+<li>Adapter 1: <strong>NAT</strong></li>
+<li>Adapter 2: Diatur ke <strong>Internal Network</strong> dengan nama <code>LabA_Network</code>.</li>
+<li>Adapter 3: Diatur ke <strong>Internal Network</strong> dengan nama <code>LabB_Network</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Konfigurasi Dua Interface Jaringan di Debian</strong>:</p>
+<ul>
+<li>Di dalam VM ini, konfigurasi IP statis pada kedua <em>interface</em>. Identifikasi nama <em>interface</em> dengan <code>ip a</code>.</li>
+<li><em>Interface</em> yang terhubung ke <code>LabA_Network</code> (misal <code>enp0s8</code>) menjadi <code>192.168.10.254/24</code>.</li>
+<li><em>Interface</em> yang terhubung ke <code>LabB_Network</code> (misal <code>enp0s9</code>) menjadi <code>192.168.20.254/24</code>.</li>
+<li>Contoh <code>/etc/network/interfaces</code>:</li>
+</ul>
+<p><div class="language-ini highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="na">auto enp0s8</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="na">iface enp0s3 inet static</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">    </span><span class="na">address 192.168.10.254</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">    </span><span class="na">netmask 255.255.255.0</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="na">auto enp0s9</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="na">iface enp0s8 inet static</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">    </span><span class="na">address 192.168.20.254</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">    </span><span class="na">netmask 255.255.255.0</span>
+</span></code></pre></div>
+* Restart layanan <em>networking</em>: <code>systemctl restart networking</code>.
+4.  <strong>Aktifkan IP Forwarding</strong>: Ini krusial agar VM ini dapat meneruskan paket antar <em>subnet</em>.
+* Edit <code>/etc/sysctl.conf</code>: <code>nano /etc/sysctl.conf</code>
+* Cari baris <code>#net.ipv4.ip_forward=1</code> dan hilangkan tanda <code>#</code> di depannya:</p>
+<p><div class="language-ini highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="na">net.ipv4.ip_forward</span><span class="o">=</span><span class="s">1</span>
+</span></code></pre></div>
+* Simpan dan keluar. Terapkan perubahan tanpa <em>reboot</em>: <code>sysctl -p</code>.
+5.  <strong>Instalasi DHCP Relay Agent</strong>:
+* Instal paket <code>isc-dhcp-relay</code>: <code>apt update &amp;&amp;   apt install isc-dhcp-relay</code>
+6.  <strong>Konfigurasi DHCP Relay Agent</strong>:
+* Edit file <code>/etc/default/isc-dhcp-relay</code>: <code>nano /etc/default/isc-dhcp-relay</code>
+* Sesuaikan baris berikut:</p>
+<p><div class="language-ini highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># What interfaces should the DHCP relay listen on?</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="na">INTERFACESv4</span><span class="o">=</span><span class="s">&quot;enp0s9&quot;</span><span class="w"> </span><span class="c1"># Interface yang menghadap ke klien (Lab B)</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="c1"># A list of DHCP servers to send requests to.</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="c1"># These should be IP addresses, not hostnames.</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="na">SERVERS</span><span class="o">=</span><span class="s">&quot;192.168.10.1&quot;</span><span class="w"> </span><span class="c1"># IP Address DHCP Server di Lab A</span>
+</span></code></pre></div>
+Simpan dan keluar.
+7.  <strong>Mulai dan Aktifkan Layanan DHCP Relay Agent</strong>:</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="w">  </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>isc-dhcp-relay
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span>systemctl<span class="w"> </span>start<span class="w"> </span>isc-dhcp-relay
+</span></code></pre></div>
+Periksa status: <code>systemctl status isc-dhcp-relay</code>. Pastikan <code>active (running)</code>.</p>
+</li>
+</ol>
+<h4 id="c-pengujian-klien-lab-b-vm-3">C. Pengujian Klien Lab B (VM 3)</h4>
+<ol>
+<li><strong>Konfigurasi Network Adapter di VirtualBox</strong>:<ul>
+<li>Pastikan VM Klien Lab B Anda memiliki satu Network Adapter yang diatur ke <strong>Internal Network</strong> dengan nama <code>LabB_Network</code>.</li>
+</ul>
+</li>
+<li><strong>Konfigurasi Jaringan Klien</strong>:<ul>
+<li>Di dalam VM Klien Lab B, pastikan pengaturan jaringan diatur ke  (DHCP).</li>
+</ul>
+</li>
+<li><strong>Verifikasi IP</strong>:<ul>
+<li>Restart <em>interface</em> jaringan atau <em>reboot</em> klien.</li>
+<li>Periksa alamat IP yang diterima klien. Seharusnya klien mendapatkan IP dari rentang <code>192.168.20.100</code> hingga <code>192.168.20.200</code>, dengan <em>gateway</em> <code>192.168.20.254</code> dan DNS yang Anda tentukan.</li>
+<li>Gunakan <code>ip a</code> (Linux) atau <code>ipconfig</code> (Windows) untuk memverifikasi.</li>
+</ul>
+</li>
+<li><strong>Pengujian Konektivitas</strong>:<ul>
+<li>Coba <code>ping</code> dari klien Lab B ke <em>gateway</em>-nya (<code>192.168.20.254</code>).</li>
+<li>Coba <code>ping</code> dari klien Lab B ke DHCP Server di Lab A (<code>192.168.10.1</code>).</li>
+<li>(Opsional) Jika seluruh topologi Anda memiliki akses internet (misal, <em>router</em> memiliki NAT ke <em>host</em> fisik), coba <em>ping</em> ke <code>8.8.8.8</code> atau situs web lain.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="d-pemecahan-masalah-troubleshooting">D. Pemecahan Masalah (Troubleshooting):</h3>
+<p>Jika klien tidak mendapatkan IP atau ada masalah:</p>
+<ul>
+<li><strong>Periksa Konfigurasi VirtualBox</strong>: Pastikan semua nama <strong>Internal Network</strong> sudah benar dan konsisten. Pastikan setiap VM terhubung ke <em>network</em> yang tepat.</li>
+<li><strong>Periksa Konfigurasi IP Statis</strong>: Pastikan IP statis pada DHCP Server dan Router/Relay Agent sudah benar dan berada di <em>subnet</em> yang sesuai.</li>
+<li><strong>Periksa Firewall</strong>: Debian secara <em>default</em> tidak memiliki <em>firewall</em> yang ketat (seperti <code>ufw</code> atau <code>iptables</code>). Namun, jika kalian mengaktifkannya, pastikan port UDP <strong>67</strong> (DHCP Server) dan <strong>68</strong> (DHCP Client) terbuka.</li>
+<li><strong>Periksa Log Layanan</strong>:<ul>
+<li><code>journalctl -u isc-dhcp-server --no-pager</code> pada DHCP Server.</li>
+<li><code>journalctl -u isc-dhcp-relay --no-pager</code> pada DHCP Relay Agent.</li>
+<li>Log akan memberikan petunjuk detail tentang masalah yang terjadi.</li>
+</ul>
+</li>
+<li><strong>Pastikan IP Forwarding Aktif</strong>: Pada VM Router/Relay Agent, pastikan <code>net.ipv4.ip_forward=1</code> sudah benar-benar aktif (<code>sysctl net.ipv4.ip_forward</code>).</li>
+<li><strong>Nama Interface</strong>: Pastikan nama <em>interface</em> di file konfigurasi (misal <code>enp0s3</code>, <code>enp0s8</code>) sesuai dengan nama <em>interface</em> aktual di dalam VM (<code>ip a</code>).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
