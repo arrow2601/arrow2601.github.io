@@ -122,7 +122,7 @@ Auto Mount setiap server menyala
 nano /etc/crypttab
 ```
 ```
-data_encrypt /dev/sdb1 none luks
+data_encrypt /dev/sdc1 none luks
 ```
 ```
 nano /etc/fstab
