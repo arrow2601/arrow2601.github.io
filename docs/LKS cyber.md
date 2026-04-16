@@ -147,6 +147,50 @@ nano /etc/ssh/sshd_config
 ### Hanya mengizinkan autentikasi menggunakan Public Key Authentication pada user ‘lks’  
 
 Buat pasangan private key dan public key di windows
+![alt text](image-42.png)  
+Copy kan kuncilks.pub ke user lks di server
+```
+C:\Users\Monk>scp kuncilks.pub lks@192.168.10.2:/home/lks
+lks@192.168.10.2's password:Skills54!
+kuncilks.pub                                                  100%  103    50.3KB/s   00:00
+```
+copy isi dari kuncilks.pub di server ke authorized keys
+```
+[root@smkmadinatulquran ~]# cd /home/lks
+[root@smkmadinatulquran lks]# ls
+kuncilks.pub
+[root@smkmadinatulquran lks]# mkdir .ssh
+[root@smkmadinatulquran lks]# cat kuncilks.pub >> .ssh/authorized_keys
+```
+Tes SSH dari windows menggunakan ssh key
+```
+C:\Users\Monk>ssh -i kuncilks lks@192.168.10.2
+Last failed login: Wed Apr 15 23:16:50 EDT 2026 from 192.168.10.12 on ssh:notty
+There was 1 failed login attempt since the last successful login.
+Last login: Wed Apr 15 22:44:06 2026 from 192.168.10.12
+[lks@smkmadinatulquran ~]$
+```
+Konfigurasi sshd_config agar user lks hanya bisa menggunakan ssh_key untuk ssh dan tidak bisa menggunakan password  
+```
+nano /etc/ssh/sshd_config
+```
+tambahkan baris berikut di paling bawah  
+```
+Match User lks
+        PasswordAuthentication no
+        PubkeyAuthentication yes
+```
+```
+systemctl restart sshd
+```
+tes ssh biasa dari windows
+```
+C:\Users\Monk>ssh lks@192.168.10.2
+ssh: connect to host 192.168.10.2 port 22: Connection refused
+```  
+Tes SSH menggunakan key dari windows
+
+
 
 
 
