@@ -91,7 +91,6 @@ Syncing disks.
 lsblk
 yum install cryptsetup -y
 ```
-![alt text](image-39.png)  
 ```
 cryptsetup luksFormat /dev/sdc1
 ```
