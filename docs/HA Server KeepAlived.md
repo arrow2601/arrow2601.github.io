@@ -169,3 +169,6 @@ systemctl restart keepalived
 3. Matikan Web01 (systemctl stop nginx atau matikan VM).  
 4. Refresh browser, konten harusnya berubah menjadi Web02 secara otomatis tanpa mengganti IP/Domain.  
 
+!!! Tugas Praktikum
+    Konfigurasikan HA Webserver , yang dapat diakses dengan domain www.tugas.lan, gunakan apache sebagai web server pada web01 dan web02 , konfigurasikan keep alived pada kedua webserver , web02 sebagai master dan web01 sebagai backup, berikan virtual ip address 192.168.10.200
+
