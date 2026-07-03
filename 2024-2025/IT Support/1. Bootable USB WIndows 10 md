@@ -1,0 +1,22 @@
+# Windows 10 Bootable USB
+
+## Membuat bootable USB Menggunakan Rufus
+
+1. Download Rufus menggunakan link berikut https://github.com/pbatard/rufus/releases/download/v4.5/rufus-4.5.exe
+
+2. Install Rufus
+
+3. Buka aplikasi Rufus 
+
+4. Siapkan FlashDisk yang akan digunakan untuk bootable windows 10. Pastikan Flashdisk anda tidak memilik data yang berharga. Karena flashdisk tersebut akan dikosongkan.
+
+5. Format Flash menjadi NTFS.
+    - Klik kanan pada flash disk -> Format
+    ![alt text](image-5.png)
+    - Pada file system pilih `NTFS` , centang `Quick Format` lalu klik `Start` tunggu hingga selesai
+
+6. Kembali pada aplikasi Rufus. Ada beberapa hal yang harus kita lakukan
+    - Memilih USB yang digunakan.
+    ![alt text](image-6.png)
+    -
+
